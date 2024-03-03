@@ -13,7 +13,7 @@ import { CameraAlt } from "@mui/icons-material";
 import { VisuallyHiddenInput } from "../components/styles/styledComponents";
 import { useFileHandler, useInputValidation, useStrongPassword } from "6pp";
 import { usernameValidator } from "../utils/validators";
-import { LOGIN_PAGE_BG_STYLES } from "../utils/constants";
+import { LOGIN_PAGE_BG_STYLES } from "../constants/BackgroundConstants";
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(false);
@@ -61,6 +61,7 @@ const Login = () => {
                   label="username"
                   margin="normal"
                   variant="outlined"
+                  color="warning"
                   value={username.value}
                   onChange={username.changeHandler}
                 />
@@ -70,13 +71,17 @@ const Login = () => {
                   type="password"
                   label="password"
                   margin="normal"
+                  color="warning"
                   variant="outlined"
                   value={password.value}
                   onChange={password.changeHandler}
                 />
-                <div className="flex justify-between">
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
                   <Button
                     variant="outlined"
+                    color="warning"
                     sx={{ marginTop: "1rem" }}
                     onClick={() => setIsLogin(false)}
                   >
@@ -84,7 +89,7 @@ const Login = () => {
                   </Button>
                   <Button
                     type="submit"
-                    color="primary"
+                    color="warning"
                     variant="contained"
                     sx={{ marginTop: "1rem" }}
                   >
@@ -104,6 +109,7 @@ const Login = () => {
                   width={"6rem"}
                   height={"6rem"}
                   margin={"auto"}
+                  marginBottom={"1rem"}
                 >
                   <Avatar
                     sx={{
@@ -115,13 +121,13 @@ const Login = () => {
                   />
                   {avatar.error && (
                     <Typography
-                      m={"1rem auto"}
-                      width={"fit-content"}
+                      fontSize={"0.65rem"}
+                      width={"100%"}
                       display={"block"}
                       color="error"
                       variant="caption"
                     >
-                      {avatar.error}
+                      *{avatar.error}
                     </Typography>
                   )}
                   <IconButton
@@ -129,7 +135,7 @@ const Login = () => {
                       position: "absolute",
                       bottom: "0",
                       right: "0",
-                      color: "black",
+                      color: "gray",
                       bgcolor: "white",
                     }}
                     component="label"
@@ -149,6 +155,7 @@ const Login = () => {
                   label="fullname"
                   margin="normal"
                   variant="outlined"
+                  color="warning"
                   value={fullname.value}
                   onChange={fullname.changeHandler}
                 />
@@ -157,6 +164,7 @@ const Login = () => {
                   fullWidth
                   label="username"
                   margin="normal"
+                  color="warning"
                   variant="outlined"
                   value={username.value}
                   onChange={username.changeHandler}
@@ -170,6 +178,7 @@ const Login = () => {
                   required
                   fullWidth
                   label="bio"
+                  color="warning"
                   margin="normal"
                   variant="outlined"
                   value={bio.value}
@@ -180,6 +189,7 @@ const Login = () => {
                   fullWidth
                   type="password"
                   label="password"
+                  color="warning"
                   margin="normal"
                   variant="outlined"
                   value={password.value}
@@ -190,9 +200,12 @@ const Login = () => {
                     {password.error}
                   </Typography>
                 )}
-                <div className="flex justify-between">
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
                   <Button
                     variant="outlined"
+                    color="warning"
                     sx={{ marginTop: "1rem" }}
                     onClick={() => setIsLogin(true)}
                   >
@@ -200,7 +213,7 @@ const Login = () => {
                   </Button>
                   <Button
                     type="submit"
-                    color="primary"
+                    color="warning"
                     variant="contained"
                     sx={{ marginTop: "1rem" }}
                   >
