@@ -73,6 +73,7 @@ const Header = () => {
                   color: "black",
                 },
                 fontFamily: "monospace",
+                fontWeight: "bold",
               }}
             >
               <ChatIcon />
