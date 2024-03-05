@@ -1,3 +1,3 @@
 export const HEADER_COLOR = "#ffc107";
 
-// secondary color : "#ff3d00"
+export const BUTTON_COLOR = "#ff3d00";

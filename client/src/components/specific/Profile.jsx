@@ -40,6 +40,11 @@ const Profile = () => {
         }}
       />
       <ProfileCard heading={"Bio"} text={"sneh soni"} />
+      <Divider
+        orientation="horizontal"
+        variant="middle"
+        sx={{ width: "250px", backgroundColor: "white" }}
+      />
       <ProfileCard
         heading={"Username"}
         text={"sneh soni"}
@@ -50,11 +55,6 @@ const Profile = () => {
         heading={"Joined"}
         text={moment("2023-12-31T18:30:00.000Z").fromNow()}
         Icon={<CalendarIcon />}
-      />
-      <Divider
-        orientation="horizontal"
-        variant="middle"
-        sx={{ width: "250px", backgroundColor: "white" }}
       />
     </Stack>
   );

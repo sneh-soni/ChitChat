@@ -18,6 +18,6 @@ export const Link = styled(LinkComponent)`
   color: black;
   padding: 0.1rem;
   &:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.25);
   }
 `;

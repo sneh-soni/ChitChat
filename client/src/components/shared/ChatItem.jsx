@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import { Link } from "../styles/styledComponents";
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, ListItem, Stack, Typography } from "@mui/material";
 import AvatarCard from "./AvatarCard";
 
 const ChatItem = ({
@@ -19,7 +19,8 @@ const ChatItem = ({
       to={`/chat/${_id}`}
       onContextMenu={(e) => handleDeleteChat(e, _id, groupChat)}
     >
-      <div
+      <ListItem
+        divider
         style={{
           display: "flex",
           gap: "1rem",
@@ -56,7 +57,7 @@ const ChatItem = ({
             }}
           />
         )}
-      </div>
+      </ListItem>
     </Link>
   );
 };
