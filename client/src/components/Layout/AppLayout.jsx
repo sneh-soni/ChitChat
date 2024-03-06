@@ -26,6 +26,7 @@ const AppLayout = () => (WrappedComponent) => {
               display: { xs: "none", sm: "block" },
             }}
             height={"100%"}
+            borderRight={"1px solid rgba(0,0,0,0.25)"}
           >
             <ChatList
               chats={sampleChat}
