@@ -27,12 +27,12 @@ export const InputBox = styled("input")`
   height: 90%;
   border: none;
   outline: none;
-  padding: 0 2.2rem;
+  padding: 0 2.5rem;
   border-radius: 0.5rem;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   background-color: rgba(0, 0, 0, 0.25);
   ::placeholder {
     color: rgba(0, 0, 0, 0.5);
-    font-size: 0.8rem;
+    font-size: 0.9rem;
   }
 `;

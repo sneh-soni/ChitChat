@@ -3,10 +3,10 @@ import React from "react";
 
 const AvatarCard = ({ avatar = [], max = 4 }) => {
   return (
-    <Stack direction={"row"} spacing={0.5}>
+    <Stack direction={"row"}>
       <AvatarGroup max={max}>
         <Box
-          width={"5rem"}
+          width={"4rem"}
           height={"2rem"}
           sx={{ position: "relative", left: "0.5rem" }}
         >
@@ -21,7 +21,7 @@ const AvatarCard = ({ avatar = [], max = 4 }) => {
                 position: "absolute",
                 left: {
                   xs: `${0.5 + index}rem`,
-                  sm: `${index}rem`,
+                  sm: `${index / 2}rem`,
                 },
               }}
             />

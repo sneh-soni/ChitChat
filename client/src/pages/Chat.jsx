@@ -6,25 +6,36 @@ import {
   Send as SendIcon,
 } from "@mui/icons-material";
 import { InputBox } from "../components/styles/styledComponents";
-import FileMenu from "../components/styles/FileMenu";
+import FileMenu from "../components/dialog/FileMenu";
+import { sampleMessages } from "../constants/SampleData";
+import MessageComponent from "../components/shared/MessageComponent";
+
+const user = {
+  _id: "mymsg",
+  name: "sneh soni",
+};
 
 const Chat = () => {
   const containerRef = useRef(null);
-  const fileMenuRef = useRef(null);
   return (
-    <Box padding={"0.25rem"} height={"100%"}>
-      <Box height={"100%"} bgcolor={"rgba(0,0,0,0.05)"}>
+    <Box paddingX={"0.25rem"} height={"100%"} width={"100%"}>
+      <Box height={"100%"} width={"100%"} bgcolor={"rgba(0,0,0,0.05)"}>
         <Stack
           ref={containerRef}
           boxSizing={"border-box"}
           padding={"1rem"}
           spacing={"1rem"}
           height={"90%"}
+          width={"100%"}
           sx={{
             overflowX: "hidden",
             overflowY: "auto",
           }}
-        ></Stack>
+        >
+          {sampleMessages.map((message) => (
+            <MessageComponent key={message._id} message={message} user={user} />
+          ))}
+        </Stack>
         <form style={{ height: "10%", paddingBottom: "0.25rem" }}>
           <Stack
             spacing={"0.5rem"}
@@ -35,7 +46,6 @@ const Chat = () => {
           >
             <IconButton
               sx={{ position: "absolute", rotate: "30deg", left: "0.5rem" }}
-              ref={fileMenuRef}
             >
               <AttachFileIcon />
             </IconButton>
@@ -56,7 +66,7 @@ const Chat = () => {
             </IconButton>
           </Stack>
         </form>
-        <FileMenu anchor={fileMenuRef.current} />
+        <FileMenu />
       </Box>
     </Box>
   );
