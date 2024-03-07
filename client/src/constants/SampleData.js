@@ -98,11 +98,7 @@ export const sampleMessages = [
     attachments: [
       {
         public_id: "first message first attachment",
-        url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMIYPQpAHWfspO8qrIdSO7Pkx-JpkIU03WVA&usqp=CAU",
-      },
-      {
-        public_id: "first message second attachment",
-        url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMIYPQpAHWfspO8qrIdSO7Pkx-JpkIU03WVA&usqp=CAU",
+        url: "https://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/double_ship.png",
       },
     ],
     content: "sjdnguyiksdguihusngiuhkksdhgfuishdnguikhrgiurhgasduhb",
@@ -118,7 +114,7 @@ export const sampleMessages = [
     attachments: [
       {
         public_id: "second message first attachment",
-        url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMIYPQpAHWfspO8qrIdSO7Pkx-JpkIU03WVA&usqp=CAU",
+        url: "https://www.dropbox.com/s/y0ry2w3i7q59ozx/Sample_854x480.mp4",
       },
     ],
     content: "sjdnguk",
@@ -134,7 +130,7 @@ export const sampleMessages = [
     attachments: [
       {
         public_id: "third message first attachment",
-        url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMIYPQpAHWfspO8qrIdSO7Pkx-JpkIU03WVA&usqp=CAU",
+        url: "https://file-examples.com/storage/fe7b7e0dc465e22bc9e6da8/2017/11/file_example_MP3_700KB.mp3",
       },
     ],
     content: "sjdk",

@@ -5,20 +5,31 @@ import { transformImage } from "../../utils/features";
 const RenderAttachment = (file, url) => {
   switch (file) {
     case "video":
-      return <video src={url} preload="none" width={"200px"} controls />;
+      return (
+        <video
+          style={{ width: "100%" }}
+          src={url}
+          preload="none"
+          width={"200px"}
+          controls
+        />
+      );
     case "image":
       return (
         <img
           src={transformImage(url, 200)}
           alt="attachment"
-          width={"800px"}
-          height={"800px"}
-          style={{ objectFit: "contain" }}
+          style={{
+            objectFit: "contain",
+            width: "100%",
+          }}
         />
       );
 
     case "audio":
-      return <audio src={url} preload="none" controls />;
+      return (
+        <audio style={{ width: "100%" }} src={url} preload="none" controls />
+      );
 
     default:
       return <FileOpen />;

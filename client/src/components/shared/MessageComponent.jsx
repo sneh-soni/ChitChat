@@ -4,6 +4,7 @@ import React from "react";
 import { AvTimer } from "@mui/icons-material";
 import { fileFormat } from "../../utils/features";
 import RenderAttachment from "./RenderAttachment";
+import { HEADER_COLOR } from "../../constants/ColorConstants";
 
 const MessageComponent = ({ message, user }) => {
   const { content, sender, attachments = [], createdAt } = message;
@@ -13,11 +14,11 @@ const MessageComponent = ({ message, user }) => {
     <div
       style={{
         alignSelf: sameSender ? "flex-end" : "flex-start",
-        backgroundColor: "rgba(0,0,0,0.2)",
+        backgroundColor: sameSender ? "rgba(0,0,0,0.2)" : HEADER_COLOR,
         padding: "0.3rem",
         borderRadius: "0.25rem",
         color: "black",
-        maxWidth: "40%",
+        width: attachments.length > 0 ? "45%" : "fit-content",
         height: "fit-content",
         overflowWrap: "break-word",
         wordBreak: "break-word",
@@ -44,8 +45,17 @@ const MessageComponent = ({ message, user }) => {
           const file = fileFormat(url);
 
           return (
-            <Box key={index}>
-              <a href="" target="_blank" download style={{ color: "black" }}>
+            <Box width={"100%"} paddingY={"0.5rem"} key={index}>
+              <a
+                href={url}
+                target="_blank"
+                download
+                style={{
+                  color: "black",
+                  width: "100%",
+                  justifyContent: "center",
+                }}
+              >
                 {RenderAttachment(file, url)}
               </a>
             </Box>
