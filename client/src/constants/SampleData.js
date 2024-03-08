@@ -29,19 +29,127 @@ export const sampleChat = [
     groupChat: false,
     members: ["1", "2"],
   },
+  {
+    avatar: [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMIYPQpAHWfspO8qrIdSO7Pkx-JpkIU03WVA&usqp=CAU",
+    ],
+    name: "sneh soni",
+    _id: "4",
+    groupChat: false,
+    members: ["1", "2"],
+  },
+  {
+    avatar: [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMIYPQpAHWfspO8qrIdSO7Pkx-JpkIU03WVA&usqp=CAU",
+    ],
+    name: "sneh soni",
+    _id: "5",
+    groupChat: false,
+    members: ["1", "2"],
+  },
+  {
+    avatar: [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMIYPQpAHWfspO8qrIdSO7Pkx-JpkIU03WVA&usqp=CAU",
+    ],
+    name: "sneh soni",
+    _id: "6",
+    groupChat: false,
+    members: ["1", "2"],
+  },
+  {
+    avatar: [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMIYPQpAHWfspO8qrIdSO7Pkx-JpkIU03WVA&usqp=CAU",
+    ],
+    name: "sneh soni",
+    _id: "7",
+    groupChat: false,
+    members: ["1", "2"],
+  },
+  {
+    avatar: [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMIYPQpAHWfspO8qrIdSO7Pkx-JpkIU03WVA&usqp=CAU",
+    ],
+    name: "sneh soni",
+    _id: "8",
+    groupChat: false,
+    members: ["1", "2"],
+  },
+  {
+    avatar: [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMIYPQpAHWfspO8qrIdSO7Pkx-JpkIU03WVA&usqp=CAU",
+    ],
+    name: "sneh soni",
+    _id: "9",
+    groupChat: false,
+    members: ["1", "2"],
+  },
+  {
+    avatar: [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMIYPQpAHWfspO8qrIdSO7Pkx-JpkIU03WVA&usqp=CAU",
+    ],
+    name: "sneh soni",
+    _id: "10",
+    groupChat: false,
+    members: ["1", "2"],
+  },
+  {
+    avatar: [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMIYPQpAHWfspO8qrIdSO7Pkx-JpkIU03WVA&usqp=CAU",
+    ],
+    name: "sneh soni",
+    _id: "11",
+    groupChat: false,
+    members: ["1", "2"],
+  },
+  {
+    avatar: [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMIYPQpAHWfspO8qrIdSO7Pkx-JpkIU03WVA&usqp=CAU",
+    ],
+    name: "sneh soni",
+    _id: "12",
+    groupChat: false,
+    members: ["1", "2"],
+  },
+  {
+    avatar: [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMIYPQpAHWfspO8qrIdSO7Pkx-JpkIU03WVA&usqp=CAU",
+    ],
+    name: "sneh soni",
+    _id: "13",
+    groupChat: false,
+    members: ["1", "2"],
+  },
+  {
+    avatar: [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMIYPQpAHWfspO8qrIdSO7Pkx-JpkIU03WVA&usqp=CAU",
+    ],
+    name: "sneh soni",
+    _id: "14",
+    groupChat: false,
+    members: ["1", "2"],
+  },
+  {
+    avatar: [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMIYPQpAHWfspO8qrIdSO7Pkx-JpkIU03WVA&usqp=CAU",
+    ],
+    name: "sneh soni",
+    _id: "15",
+    groupChat: false,
+    members: ["1", "2"],
+  },
 ];
 
 export const sampleUsers = [
   {
     avatar:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMIYPQpAHWfspO8qrIdSO7Pkx-JpkIU03WVA&usqp=CAU",
-    name: "sneh soni",
+    name: "sneh",
     _id: "1",
   },
   {
     avatar:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMIYPQpAHWfspO8qrIdSO7Pkx-JpkIU03WVA&usqp=CAU",
-    name: "sneh soni",
+    name: "sneh soni sjdgbuisgbdugbidgsgdfgfgsag",
     _id: "2",
   },
   {
