@@ -60,7 +60,7 @@ const Login = () => {
                   fullWidth
                   label="username"
                   margin="normal"
-                  variant="outlined"
+                  variant="filled"
                   color="warning"
                   value={username.value}
                   onChange={username.changeHandler}
@@ -72,7 +72,7 @@ const Login = () => {
                   label="password"
                   margin="normal"
                   color="warning"
-                  variant="outlined"
+                  variant="filled"
                   value={password.value}
                   onChange={password.changeHandler}
                 />
@@ -99,8 +99,12 @@ const Login = () => {
               </form>
             </>
           ) : (
-            <>
-              <Typography variant="h5" sx={{ marginBottom: "0.5rem" }}>
+            <div style={{ maxHeight: "100vh" }}>
+              <Typography
+                textAlign={"center"}
+                variant="h5"
+                sx={{ marginBottom: "0.25rem" }}
+              >
                 Register
               </Typography>
               <form onSubmit={handleSignup}>
@@ -109,7 +113,6 @@ const Login = () => {
                   width={"6rem"}
                   height={"6rem"}
                   margin={"auto"}
-                  marginBottom={"1rem"}
                 >
                   <Avatar
                     sx={{
@@ -154,7 +157,7 @@ const Login = () => {
                   fullWidth
                   label="fullname"
                   margin="normal"
-                  variant="outlined"
+                  variant="standard"
                   color="warning"
                   value={fullname.value}
                   onChange={fullname.changeHandler}
@@ -162,10 +165,20 @@ const Login = () => {
                 <TextField
                   required
                   fullWidth
+                  label="something about yourself"
+                  color="warning"
+                  margin="normal"
+                  variant="standard"
+                  value={bio.value}
+                  onChange={bio.changeHandler}
+                />
+                <TextField
+                  required
+                  fullWidth
                   label="username"
                   margin="normal"
                   color="warning"
-                  variant="outlined"
+                  variant="standard"
                   value={username.value}
                   onChange={username.changeHandler}
                 />
@@ -174,16 +187,7 @@ const Login = () => {
                     {username.error}
                   </Typography>
                 )}
-                <TextField
-                  required
-                  fullWidth
-                  label="bio"
-                  color="warning"
-                  margin="normal"
-                  variant="outlined"
-                  value={bio.value}
-                  onChange={bio.changeHandler}
-                />
+
                 <TextField
                   required
                   fullWidth
@@ -191,7 +195,7 @@ const Login = () => {
                   label="password"
                   color="warning"
                   margin="normal"
-                  variant="outlined"
+                  variant="standard"
                   value={password.value}
                   onChange={password.changeHandler}
                 />
@@ -221,7 +225,7 @@ const Login = () => {
                   </Button>
                 </div>
               </form>
-            </>
+            </div>
           )}
         </Paper>
       </Container>

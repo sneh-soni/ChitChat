@@ -4,3 +4,10 @@ export const LOGIN_PAGE_BG_STYLES = {
   backgroundSize: "cover",
   backgroundPosition: "center",
 };
+
+export const ADMIN_LOGIN_PAGE_BG_STYLES = {
+  backgroundImage: `url(https://t4.ftcdn.net/jpg/02/55/77/03/360_F_255770374_rbmJO9gkkIhMBcyVPc3iW016BCLDvcWc.jpg)`,
+  backgroundRepeat: "no-repeat",
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+};
