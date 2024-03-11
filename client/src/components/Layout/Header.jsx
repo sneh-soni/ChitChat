@@ -27,7 +27,7 @@ const NewGroupDialog = lazy(() => import("../specific/NewGroup.jsx"));
 const IconBtn = ({ title, onClick, icon }) => {
   return (
     <Tooltip title={title}>
-      <IconButton color="#000" size="large" onClick={onClick}>
+      <IconButton color="#000" size="medium" onClick={onClick}>
         {icon}
       </IconButton>
     </Tooltip>
@@ -61,8 +61,15 @@ const Header = () => {
   const [isNotification, setIsNotification] = useState(false);
   return (
     <>
-      <Box sx={{ flexGrow: 1 }} height={"4rem"}>
-        <AppBar position="static" sx={{ bgcolor: HEADER_COLOR }}>
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar
+          position="static"
+          sx={{
+            bgcolor: HEADER_COLOR,
+            height: "3.2rem",
+            justifyContent: "center",
+          }}
+        >
           <Toolbar>
             <Typography
               variant="h6"

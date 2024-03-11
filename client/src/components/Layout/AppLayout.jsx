@@ -9,7 +9,7 @@ import Profile from "../specific/Profile";
 
 const AppLayout = () => (WrappedComponent) => {
   return (props) => {
-    const params = useParams(); // error //
+    const params = useParams();
     const chatId = params.chatId;
 
     const handleDeleteChat = () => {};
@@ -17,7 +17,7 @@ const AppLayout = () => (WrappedComponent) => {
       <>
         <Title />
         <Header />
-        <Grid container height={"calc(100vh - 4rem)"}>
+        <Grid container height={"calc(100vh - 3.2rem)"}>
           <Grid
             item
             sm={4}
