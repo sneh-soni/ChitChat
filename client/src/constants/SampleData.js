@@ -251,3 +251,150 @@ export const sampleMessages = [
     createdAt: "2024-03-06T17:19:49.192Z",
   },
 ];
+
+export const dashboardData = {
+  users: [
+    {
+      name: "sneh soni",
+      avatar:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMIYPQpAHWfspO8qrIdSO7Pkx-JpkIU03WVA&usqp=CAU",
+      _id: "1",
+      username: "sneh_soni",
+      friends: 20,
+      groups: 5,
+    },
+    {
+      name: "sneh soni",
+      avatar:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMIYPQpAHWfspO8qrIdSO7Pkx-JpkIU03WVA&usqp=CAU",
+      _id: "2",
+      username: "sneh_soni",
+      friends: 24,
+      groups: 54,
+    },
+    {
+      name: "sneh soni",
+      avatar:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMIYPQpAHWfspO8qrIdSO7Pkx-JpkIU03WVA&usqp=CAU",
+      _id: "3",
+      username: "sneh_soni",
+      friends: 70,
+      groups: 12,
+    },
+  ],
+
+  chats: [
+    {
+      name: "sneh soni",
+      avatar: [
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMIYPQpAHWfspO8qrIdSO7Pkx-JpkIU03WVA&usqp=CAU",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMIYPQpAHWfspO8qrIdSO7Pkx-JpkIU03WVA&usqp=CAU",
+      ],
+      _id: "1",
+      groupChat: true,
+      members: [
+        {
+          _id: "1",
+          avatar:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMIYPQpAHWfspO8qrIdSO7Pkx-JpkIU03WVA&usqp=CAU",
+        },
+        {
+          _id: "2",
+          avatar:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMIYPQpAHWfspO8qrIdSO7Pkx-JpkIU03WVA&usqp=CAU",
+        },
+      ],
+      totalMembers: 2,
+      totalMessages: 20,
+      creator: {
+        name: "john doe",
+        avatar:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMIYPQpAHWfspO8qrIdSO7Pkx-JpkIU03WVA&usqp=CAU",
+      },
+    },
+    {
+      name: "sneh soni",
+      avatar: [
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMIYPQpAHWfspO8qrIdSO7Pkx-JpkIU03WVA&usqp=CAU",
+      ],
+      _id: "2",
+      groupChat: true,
+      members: [
+        {
+          _id: "1",
+          avatar:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMIYPQpAHWfspO8qrIdSO7Pkx-JpkIU03WVA&usqp=CAU",
+        },
+        {
+          _id: "2",
+          avatar:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMIYPQpAHWfspO8qrIdSO7Pkx-JpkIU03WVA&usqp=CAU",
+        },
+        {
+          _id: "3",
+          avatar:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMIYPQpAHWfspO8qrIdSO7Pkx-JpkIU03WVA&usqp=CAU",
+        },
+      ],
+      totalMembers: 3,
+      totalMessages: 15,
+      creator: {
+        name: "john boi",
+        avatar:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMIYPQpAHWfspO8qrIdSO7Pkx-JpkIU03WVA&usqp=CAU",
+      },
+    },
+  ],
+
+  messages: [
+    {
+      attachments: [
+        {
+          public_id: "first message first attachment",
+          url: "https://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/double_ship.png",
+        },
+      ],
+      content: "jsbadgigaiuk",
+      _id: "1",
+      sender: {
+        avatar:
+          "https://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/double_ship.png",
+        name: "john doe",
+      },
+      chat: "chatId",
+      groupChat: false,
+      createdAt: "2024-03-06T17:19:49.192Z",
+    },
+    {
+      attachments: [
+        {
+          public_id: "second message first attachment",
+          url: "https://www.dropbox.com/s/y0ry2w3i7q59ozx/Sample_854x480.mp4",
+        },
+      ],
+      content: "jsbadgigaiuk",
+      _id: "2",
+      sender: {
+        _avatar:
+          "https://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/double_ship.png",
+        name: "john doe",
+      },
+      chat: "chatId",
+      groupChat: true,
+      createdAt: "2024-03-06T17:19:49.192Z",
+    },
+    {
+      attachments: [],
+      content: "jsbadgigaiuk",
+      _id: "3",
+      sender: {
+        avatar:
+          "https://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/double_ship.png",
+        name: "john doe",
+      },
+      groupChat: true,
+      chat: "chatId",
+      createdAt: "2024-03-06T17:19:49.192Z",
+    },
+  ],
+};
