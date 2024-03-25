@@ -13,22 +13,25 @@ const connectDB = async () => {
   }
 };
 
+const cookieOptions = {
+  httpOnly: true,
+  maxAge: 24 * 60 * 60 * 1000,
+  secure: true,
+  sameSite: "none",
+};
+
 const sendToken = (res, user, code, message) => {
   const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
 
-  return res
-    .status(code)
-    .cookie("Token", token, {
-      httpOnly: true,
-      maxAge: 24 * 60 * 60 * 1000,
-      secure: true,
-      sameSite: "none",
-    })
-    .json({
-      success: true,
-      message,
-      user,
-    });
+  return res.status(code).cookie("Token", token, cookieOptions).json({
+    success: true,
+    message,
+    user,
+  });
 };
 
-export { connectDB, sendToken };
+const emitEvent = (req, event, users, data) => {
+  console.log("Emmiting event: ", event);
+};
+
+export { connectDB, sendToken, cookieOptions, emitEvent };
