@@ -21,7 +21,7 @@ const userSchema = new Schema(
       required: true,
     },
     sender: {
-      type: Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
