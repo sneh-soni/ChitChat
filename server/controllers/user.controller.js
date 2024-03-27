@@ -61,10 +61,28 @@ const logout = TryCatch(async (req, res) => {
 });
 
 const searchUser = TryCatch(async (req, res) => {
-  const { name } = req.query;
+  const { name = "" } = req.query;
+
+  const allMyChats = await Chat.find({ groupChat: false, members: req.user });
+
+  const allUnavailableUsers = allMyChats.flatMap((chat) => chat.members);
+
+  const allAvailableUsers = await User.find({
+    _id: { $nin: allUnavailableUsers },
+    name: { $regex: name, $options: "i" },
+  });
+
+  const users = allAvailableUsers.map((user) => {
+    return {
+      _id: user._id,
+      name: user.name,
+      avatar: user.avatar.url,
+    };
+  });
+
   return res.status(200).json({
     success: true,
-    message: name,
+    users,
   });
 });
 

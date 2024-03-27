@@ -8,11 +8,22 @@ import {
 } from "../controllers/user.controller.js";
 import { multerUpload } from "../middlewares/multer.middleware.js";
 import { isAuthenticated } from "../middlewares/auth.js";
+import {
+  registerValidator,
+  validateHandler,
+  loginValidator,
+} from "../lib/validators.js";
 
 const router = express.Router();
 
-router.post("/newUser", multerUpload.single("avatar"), newUser);
-router.post("/login", login);
+router.post(
+  "/newUser",
+  multerUpload.single("avatar"),
+  registerValidator(),
+  validateHandler,
+  newUser
+);
+router.post("/login", loginValidator(), validateHandler, login);
 
 router.use(isAuthenticated);
 
