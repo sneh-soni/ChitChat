@@ -14,4 +14,19 @@ const isAuthenticated = (req, res, next) => {
   next();
 };
 
-export { isAuthenticated };
+const isAdmin = (req, res, next) => {
+  const adminToken = req.cookies["admin-token"];
+
+  if (!adminToken)
+    return next(new ErrorHandler("Only Admins can access this route", 401));
+
+  const secretKey = jwt.verify(adminToken, process.env.JWT_SECRET);
+
+  const isMatched = secretKey === process.env.ADMIN_SECRET_KEY;
+
+  if (!isMatched) return next(new ErrorHandler("Invalid Secret Key", 401));
+
+  next();
+};
+
+export { isAuthenticated, isAdmin };

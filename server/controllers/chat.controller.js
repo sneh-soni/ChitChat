@@ -222,6 +222,11 @@ const sendAttachments = TryCatch(async (req, res, next) => {
   if (files.length < 1)
     return next(new ErrorHandler("Please provide attachments", 400));
 
+  if (files.length > 5)
+    return next(
+      new ErrorHandler("maximum number of attachments can be 5", 400)
+    );
+
   // cloudinary
 
   const attachments = [];

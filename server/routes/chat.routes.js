@@ -31,9 +31,9 @@ router.use(isAuthenticated);
 router.post("/new", newGroupValidator(), validateHandler, newGroupChat);
 router.get("/my/chats", getMyChats);
 router.get("/my/groups", getMyGroups);
-router.put("/addmembers", addMemberValidator(), validateHandler, addMembers);
+router.put("/add-members", addMemberValidator(), validateHandler, addMembers);
 router.delete(
-  "/removemember",
+  "/remove-member",
   removeMemberValidator(),
   validateHandler,
   removeMember
