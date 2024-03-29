@@ -6,6 +6,7 @@ import { connectDB } from "./utils/features.js";
 import { Server } from "socket.io";
 import { createServer } from "http";
 import { v4 as uuid } from "uuid";
+import cors from "cors";
 
 import ChatRouter from "./routes/chat.routes.js";
 import UserRouter from "./routes/user.routes.js";
@@ -27,9 +28,15 @@ export const userSocketIDs = new Map();
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded());
-app.use("/users", UserRouter);
-app.use("/chats", ChatRouter);
-app.use("/admin", adminRouter);
+app.use(
+  cors({
+    origin: ["http://localhost:3001", process.env.CLIENT_URL],
+    credentials: true,
+  })
+);
+app.use("/api/v1/users", UserRouter);
+app.use("/api/v1/chats", ChatRouter);
+app.use("/api/v1/admin", adminRouter);
 
 io.use((socket, next) => {});
 

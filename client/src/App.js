@@ -1,7 +1,9 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ProtectRoute from "./components/auth/ProtectRoute.jsx";
 import { LayoutLoader } from "./components/Layout/Loaders.jsx";
+import axios from "axios";
+import { server } from "./constants/config.js";
 
 const Home = lazy(() => import("./pages/Home.jsx"));
 const Login = lazy(() => import("./pages/Login.jsx"));
@@ -18,7 +20,20 @@ const UserManagement = lazy(() => import("./pages/admin/UserManagement.jsx"));
 
 const user = true;
 
+// ${process.env.REACT_APP_SERVER}
+
 const App = () => {
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3000/api/v1/users/me`)
+      .then((res) => {
+        console.log("res: ", res);
+      })
+      .catch((err) => {
+        console.log("err: ", err);
+      });
+  }, []);
+
   return (
     <BrowserRouter>
       <Suspense fallback={<LayoutLoader />}>

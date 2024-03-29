@@ -45,6 +45,7 @@ const login = TryCatch(async (req, res, next) => {
 
   sendToken(res, user, 201, "User logged in Successfully");
 });
+
 const getMyProfile = TryCatch(async (req, res, next) => {
   const user = await User.findById(req.user);
 
