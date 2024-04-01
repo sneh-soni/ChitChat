@@ -1,6 +1,10 @@
 import { TryCatch } from "../middlewares/error.middleware.js";
 import { User } from "../models/user.model.js";
-import { emitEvent, sendToken } from "../utils/features.js";
+import {
+  emitEvent,
+  sendToken,
+  uploadFilesToCloudinary,
+} from "../utils/features.js";
 import { compare } from "bcrypt";
 import { ErrorHandler } from "../utils/utility.js";
 import { cookieOptions } from "../utils/features.js";
@@ -10,26 +14,28 @@ import { NEW_REQUEST, REFETCH_CHATS } from "../constants/events.js";
 import { getOtherMembers } from "../lib/helpers.js";
 
 const newUser = TryCatch(async (req, res, next) => {
-  const { name, username, password, bio } = req.body;
+  const { fullname, username, password, bio } = req.body;
 
   const file = req.file;
 
   if (!file) return next(new ErrorHandler("Please Upload Avatar", 400));
 
+  const result = await uploadFilesToCloudinary([file]);
+
   const avatar = {
-    public_id: "one",
-    url: "one",
+    public_id: result[0].public_id,
+    url: result[0].url,
   };
 
   const user = await User.create({
-    name,
+    name: fullname,
     bio,
     username,
     password,
     avatar,
   });
 
-  sendToken(res, user, 201, "User created Successfully");
+  sendToken(res, user, 201, "Registered Successfully");
 });
 
 const login = TryCatch(async (req, res, next) => {
@@ -43,7 +49,7 @@ const login = TryCatch(async (req, res, next) => {
 
   if (!isMatch) return next(new ErrorHandler("Incorrect Password", 401));
 
-  sendToken(res, user, 201, "User logged in Successfully");
+  sendToken(res, user, 201, `Welcome Back! ${user.name}`);
 });
 
 const getMyProfile = TryCatch(async (req, res, next) => {
@@ -66,7 +72,7 @@ const logout = TryCatch(async (req, res) => {
     })
     .json({
       success: true,
-      message: "User logged out",
+      message: "Logged out",
     });
 });
 

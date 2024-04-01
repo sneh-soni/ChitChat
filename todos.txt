@@ -1,0 +1,5 @@
+Password opener eye in login signup forms
+loading shimmer after login/signup in forms
+hide vertical scrollbars
+profile photo with whom chatting in chat
+AI chat

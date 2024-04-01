@@ -14,20 +14,69 @@ import { VisuallyHiddenInput } from "../components/styles/styledComponents";
 import { useFileHandler, useInputValidation, useStrongPassword } from "6pp";
 import { usernameValidator } from "../utils/validators";
 import { LOGIN_PAGE_BG_STYLES } from "../constants/BackgroundConstants";
+import { useDispatch } from "react-redux";
+import { userExists } from "../redux/reducers/auth";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 const Login = () => {
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
   const username = useInputValidation("", usernameValidator);
   const fullname = useInputValidation("");
   const bio = useInputValidation("");
   const password = useStrongPassword();
   const avatar = useFileHandler("single");
 
-  const handleLogin = (e) => {
+  const dispatch = useDispatch();
+  const handleLogin = async (e) => {
     e.preventDefault();
+
+    try {
+      const { data } = await axios.post(
+        process.env.REACT_APP_SERVER + `/api/v1/users/login`,
+        {
+          username: username.value,
+          password: password.value,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      dispatch(userExists(true));
+      toast.success(data.message);
+    } catch (error) {
+      toast.error(error?.response?.data?.message || "Something went wrong");
+    }
   };
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("username", username.value);
+    formData.append("fullname", fullname.value);
+    formData.append("password", password.value);
+    formData.append("avatar", avatar.file);
+    formData.append("bio", bio.value);
+
+    try {
+      const { data } = await axios.post(
+        process.env.REACT_APP_SERVER + `/api/v1/users/newUser`,
+        formData,
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      dispatch(userExists(true));
+      toast.success(data.message);
+    } catch (error) {
+      toast.error(error?.response?.data?.message || "Something went wrong");
+    }
   };
 
   return (

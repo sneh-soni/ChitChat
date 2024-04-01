@@ -14,7 +14,7 @@ const validateHandler = (req, res, next) => {
 };
 
 const registerValidator = () => [
-  body("name", "Name Cannot be Empty").notEmpty(),
+  body("fullname", "Name Cannot be Empty").notEmpty(),
   body("username", "Username Cannot be Empty").notEmpty(),
   body("bio", "Bio Cannot be Empty").notEmpty(),
   body("password", "Password Cannot be Empty").notEmpty(),

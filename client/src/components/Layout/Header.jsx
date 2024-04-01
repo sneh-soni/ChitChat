@@ -19,6 +19,10 @@ import {
 } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import ChatIcon from "../../constants/LogoSvg.jsx";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { userNotExists } from "../../redux/reducers/auth.js";
 
 const SearchDialog = lazy(() => import("../specific/Search.jsx"));
 const NotificationsDialog = lazy(() => import("../specific/Notifications.jsx"));
@@ -36,6 +40,7 @@ const IconBtn = ({ title, onClick, icon }) => {
 
 const Header = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleMobile = () => {
     setIsMobile((prev) => !prev);
   };
@@ -48,7 +53,21 @@ const Header = () => {
   const openNotification = () => {
     setIsNotification((prev) => !prev);
   };
-  const logoutHandler = () => {};
+  const logoutHandler = async () => {
+    try {
+      const { data } = await axios.get(
+        process.env.REACT_APP_SERVER + "/api/v1/users/logout",
+        {
+          withCredentials: true,
+        }
+      );
+
+      toast.success(data.message);
+      dispatch(userNotExists());
+    } catch (error) {
+      toast(error?.response?.data?.message || "Something went wrong");
+    }
+  };
   const navigateToGroups = () => {
     startTransition(() => {
       navigate("/groups");
@@ -59,6 +78,7 @@ const Header = () => {
   const [isSearch, setIsSearch] = useState(false);
   const [isNewGroup, setIsNewGroup] = useState(false);
   const [isNotification, setIsNotification] = useState(false);
+
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>

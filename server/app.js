@@ -7,6 +7,7 @@ import { Server } from "socket.io";
 import { createServer } from "http";
 import { v4 as uuid } from "uuid";
 import cors from "cors";
+import { v2 as cloudinary } from "cloudinary";
 
 import ChatRouter from "./routes/chat.routes.js";
 import UserRouter from "./routes/user.routes.js";
@@ -24,6 +25,22 @@ const server = createServer(app);
 const io = new Server(server, {});
 const port = process.env.PORT || 3000;
 export const userSocketIDs = new Map();
+
+connectDB()
+  .then(() => {
+    server.listen(port, () => {
+      console.log(`Server is running on port ${port}`);
+    });
+  })
+  .catch((error) => {
+    console.log("Mongodb connection failed: ", error);
+  });
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 app.use(express.json());
 app.use(cookieParser());
@@ -91,15 +108,5 @@ io.on("connection", (socket) => {
     userSocketIDs.delete(user._id.toString());
   });
 });
-
-connectDB()
-  .then(() => {
-    server.listen(port, () => {
-      console.log(`Server is running on port ${port}`);
-    });
-  })
-  .catch((error) => {
-    console.log("Mongodb connection failed: ", error);
-  });
 
 app.use(errorMiddleware);
