@@ -1,5 +1,6 @@
 Password opener eye in login signup forms
 loading shimmer after login/signup in forms
 hide vertical scrollbars
+searchPeople and Notifications close buttons
 profile photo with whom chatting in chat
 AI chat

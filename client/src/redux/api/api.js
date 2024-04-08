@@ -7,7 +7,7 @@ const api = createApi({
     baseUrl: process.env.REACT_APP_SERVER + "/api/v1/",
   }),
 
-  tagTypes: ["Chats"],
+  tagTypes: ["Chats", "Users"],
 
   endpoints: (builder) => ({
     myChats: builder.query({
@@ -17,8 +17,30 @@ const api = createApi({
       }),
       providesTags: ["Chats"],
     }),
+
+    searchUser: builder.query({
+      query: (name) => ({
+        url: `users/search?name=${name}`,
+        credentials: "include",
+      }),
+      providesTags: ["Users"],
+    }),
+
+    sendFriendRequest: builder.mutation({
+      query: (data) => ({
+        url: "users/send-request",
+        method: "PUT",
+        credentials: "include",
+        body: data,
+      }),
+      invalidatesTags: ["Users"],
+    }),
   }),
 });
 
 export default api;
-export const { useMyChatsQuery } = api;
+export const {
+  useMyChatsQuery,
+  useLazySearchUserQuery,
+  useSendFriendRequestMutation,
+} = api;
