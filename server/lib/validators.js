@@ -66,11 +66,11 @@ const sendRequestValidator = () => [
 ];
 const acceptRequestValidator = () => [
   body("requestId", "Please provide Request ID").notEmpty(),
-  body("acceptORreject")
+  body("accept")
     .notEmpty()
     .withMessage("Please provide Accept OR Reject")
     .isBoolean()
-    .withMessage("acceptORreject must be Boolean"),
+    .withMessage("accept/reject must be Boolean"),
 ];
 
 const adminLoginValidator = () => [

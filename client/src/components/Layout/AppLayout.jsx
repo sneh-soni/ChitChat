@@ -17,6 +17,7 @@ const AppLayout = () => (WrappedComponent) => {
     const chatId = params.chatId;
 
     const { isMobile } = useSelector((store) => store.misc);
+    const { user } = useSelector((store) => store.auth);
 
     const { isLoading, data, isError, error, refetch } = useMyChatsQuery("");
 
@@ -79,7 +80,7 @@ const AppLayout = () => (WrappedComponent) => {
               borderRadius: "0.2rem",
             }}
           >
-            <Profile />
+            <Profile user={user} />
           </Grid>
         </Grid>
       </>

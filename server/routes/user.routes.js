@@ -29,6 +29,7 @@ router.post(
   validateHandler,
   newUser
 );
+
 router.post("/login", loginValidator(), validateHandler, login);
 
 router.use(isAuthenticated);

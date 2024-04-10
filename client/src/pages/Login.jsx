@@ -51,6 +51,7 @@ const Login = () => {
       toast.error(error?.response?.data?.message || "Something went wrong");
     }
   };
+
   const handleSignup = async (e) => {
     e.preventDefault();
 

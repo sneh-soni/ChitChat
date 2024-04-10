@@ -132,12 +132,12 @@ const sendFriendRequest = TryCatch(async (req, res, next) => {
 
   return res.status(200).json({
     success: true,
-    message: "Friend Request sent successfully",
+    message: "Friend Request sent",
   });
 });
 
 const acceptFriendRequest = TryCatch(async (req, res, next) => {
-  const { requestId, acceptORreject } = req.body;
+  const { requestId, accept } = req.body;
 
   const request = await Request.findById(requestId)
     .populate("sender", "name")
@@ -150,7 +150,7 @@ const acceptFriendRequest = TryCatch(async (req, res, next) => {
       new ErrorHandler("You are not authorized to accept this request", 400)
     );
 
-  if (!acceptORreject) {
+  if (!accept) {
     await request.deleteOne();
 
     return res.status(200).json({

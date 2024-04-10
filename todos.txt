@@ -4,3 +4,11 @@ hide vertical scrollbars
 searchPeople and Notifications close buttons
 profile photo with whom chatting in chat
 AI chat
+
+
+
+
+// Errors
+
+on login/register the user is not updating in redux store as it is entered ==>
+it is only true at first, but after reloading the page it is getting updated to actual info

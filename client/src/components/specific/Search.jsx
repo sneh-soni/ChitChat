@@ -1,3 +1,5 @@
+import { useInputValidation } from "6pp";
+import { Search as SearchIcon } from "@mui/icons-material";
 import {
   Dialog,
   DialogTitle,
@@ -7,47 +9,34 @@ import {
   TextField,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useInputValidation } from "6pp";
-import { Search as SearchIcon } from "@mui/icons-material";
-import UserItem from "../shared/UserItem";
-import { sampleUsers } from "../../constants/SampleData";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsSearch } from "../../redux/reducers/misc";
+import { useAsyncMutation } from "../../hooks/hook";
 import {
   useLazySearchUserQuery,
   useSendFriendRequestMutation,
 } from "../../redux/api/api";
-import toast from "react-hot-toast";
+import { setIsSearch } from "../../redux/reducers/misc";
+import UserItem from "../shared/UserItem";
 
 const Search = () => {
   const search = useInputValidation("");
   const dispatch = useDispatch();
   const [searchUser] = useLazySearchUserQuery("");
-  const [sendFriendRequest] = useSendFriendRequestMutation("");
+  const [sendFriendRequest, isLoadingSendFriendRequest] = useAsyncMutation(
+    useSendFriendRequestMutation
+  );
 
   const { isSearch } = useSelector((store) => store.misc);
 
   const addFriendHandler = async (id) => {
-    try {
-      const res = await sendFriendRequest({ userId: id });
-      if (res.data) {
-        toast.success(res.data);
-        console.log(res.data);
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error(error?.response?.data?.message || "Something went wrong");
-    }
+    await sendFriendRequest("Sending request..", { userId: id });
   };
-
-  let isLoadingSendFriendRequest = false;
 
   const [users, setUsers] = useState([]);
 
   const seachCloseHandler = () => dispatch(setIsSearch(false));
 
   useEffect(() => {
-    if (search.value.length < 1) return;
     const timeOutId = setTimeout(() => {
       searchUser(search.value)
         .then(({ data }) => {
