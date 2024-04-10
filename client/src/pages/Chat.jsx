@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import AppLayout from "../components/Layout/AppLayout";
 import { Box, IconButton, Stack } from "@mui/material";
 import {
@@ -9,6 +9,7 @@ import { InputBox } from "../components/styles/styledComponents";
 import FileMenu from "../components/dialog/FileMenu";
 import { sampleMessages } from "../constants/SampleData";
 import MessageComponent from "../components/shared/MessageComponent";
+import { GetSocket } from "../socket";
 
 const user = {
   _id: "mymsg",
@@ -17,6 +18,16 @@ const user = {
 
 const Chat = () => {
   const containerRef = useRef(null);
+  const [message, setMessage] = useState("");
+
+  const socket = GetSocket();
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+
+    if (!message.trim()) return;
+  };
+
   return (
     <Box paddingX={"0.25rem"} height={"100%"} width={"100%"}>
       <Box height={"100%"} width={"100%"} bgcolor={"rgba(0,0,0,0.05)"}>
@@ -36,7 +47,10 @@ const Chat = () => {
             <MessageComponent key={message._id} message={message} user={user} />
           ))}
         </Stack>
-        <form style={{ height: "10%", paddingBottom: "0.25rem" }}>
+        <form
+          style={{ height: "10%", paddingBottom: "0.25rem" }}
+          onSubmit={submitHandler}
+        >
           <Stack
             spacing={"0.5rem"}
             direction={"row"}
@@ -49,7 +63,11 @@ const Chat = () => {
             >
               <AttachFileIcon />
             </IconButton>
-            <InputBox placeholder="Write a message..." />
+            <InputBox
+              placeholder="Write a message..."
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+            />
             <IconButton
               type="submit"
               size="small"

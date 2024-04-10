@@ -9,12 +9,14 @@ import Title from "../shared/Title";
 import ChatList from "../specific/ChatList";
 import Profile from "../specific/Profile";
 import Header from "./Header";
+import { GetSocket } from "../../socket";
 
 const AppLayout = () => (WrappedComponent) => {
   return (props) => {
     const params = useParams();
     const dispatch = useDispatch();
     const chatId = params.chatId;
+    const socket = GetSocket();
 
     const { isMobile } = useSelector((store) => store.misc);
     const { user } = useSelector((store) => store.auth);

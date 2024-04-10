@@ -8,13 +8,15 @@ import { createServer } from "http";
 import { v4 as uuid } from "uuid";
 import cors from "cors";
 import { v2 as cloudinary } from "cloudinary";
+import { corsOptions } from "./constants/config.js";
+import { NEW_MESSAGE, NEW_MESSAGE_ALERT } from "./constants/events.js";
+import { getSockets } from "./lib/helpers.js";
+import { Message } from "./models/message.model.js";
+import { socketAuth } from "./middlewares/auth.js";
 
 import ChatRouter from "./routes/chat.routes.js";
 import UserRouter from "./routes/user.routes.js";
 import adminRouter from "./routes/admin.routes.js";
-import { NEW_MESSAGE, NEW_MESSAGE_ALERT } from "./constants/events.js";
-import { getSockets } from "./lib/helpers.js";
-import { Message } from "./models/message.model.js";
 
 dotenv.config({
   path: "./.env",
@@ -22,7 +24,9 @@ dotenv.config({
 
 const app = express();
 const server = createServer(app);
-const io = new Server(server, {});
+const io = new Server(server, {
+  cors: corsOptions,
+});
 const port = process.env.PORT || 3000;
 export const userSocketIDs = new Map();
 
@@ -45,25 +49,19 @@ cloudinary.config({
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded());
-app.use(
-  cors({
-    origin: ["http://localhost:3001", process.env.CLIENT_URL],
-    credentials: true,
-  })
-);
+app.use(cors(corsOptions));
 app.use("/api/v1/users", UserRouter);
 app.use("/api/v1/chats", ChatRouter);
 app.use("/api/v1/admin", adminRouter);
 
-io.use((socket, next) => {});
+io.use((socket, next) => {
+  cookieParser()(socket.request, socket.request.res, async (err) => {
+    await socketAuth(err, socket, next);
+  });
+});
 
 io.on("connection", (socket) => {
-  console.log("User connected: ", socket.id);
-
-  const user = {
-    _id: "kjsdgj",
-    name: "kjnsag",
-  };
+  const user = socket.user;
 
   userSocketIDs.set(user._id.toString(), socket.id);
 
