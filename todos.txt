@@ -4,6 +4,7 @@ hide vertical scrollbars
 searchPeople and Notifications close buttons
 profile photo with whom chatting in chat
 AI chat
+Not found page
 
 
 

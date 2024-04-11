@@ -7,7 +7,7 @@ const api = createApi({
     baseUrl: process.env.REACT_APP_SERVER + "/api/v1/",
   }),
 
-  tagTypes: ["Chats", "Users"],
+  tagTypes: ["Chats", "Users", "Messages"],
 
   endpoints: (builder) => ({
     myChats: builder.query({
@@ -53,6 +53,27 @@ const api = createApi({
       }),
       invalidatesTags: ["Chats"],
     }),
+
+    chatDetails: builder.query({
+      query: ({ chatId, populate }) => {
+        let url = `chats/${chatId}`;
+        if (populate) url += `?populate=${populate}`;
+
+        return {
+          url,
+          credentials: "include",
+        };
+      },
+      providesTags: ["Chats"],
+    }),
+
+    getMessages: builder.query({
+      query: ({ chatId, page }) => ({
+        url: `chats/messages/${chatId}?page=${page}`,
+        credentials: "include",
+      }),
+      providesTags: ["Messages"],
+    }),
   }),
 });
 
@@ -63,5 +84,7 @@ export const {
   useLazySearchUserQuery,
   useSendFriendRequestMutation,
   useGetNotificationsQuery,
+  useChatDetailsQuery,
   useAcceptFriendRequestMutation,
+  useGetMessagesQuery,
 } = api;

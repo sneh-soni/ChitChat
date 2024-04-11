@@ -1,34 +1,65 @@
-import React, { useRef, useState } from "react";
-import AppLayout from "../components/Layout/AppLayout";
-import { Box, IconButton, Stack } from "@mui/material";
 import {
   AttachFile as AttachFileIcon,
   Send as SendIcon,
 } from "@mui/icons-material";
-import { InputBox } from "../components/styles/styledComponents";
+import { Box, IconButton, Skeleton, Stack } from "@mui/material";
+import React, { useCallback, useRef, useState } from "react";
+import AppLayout from "../components/Layout/AppLayout";
 import FileMenu from "../components/dialog/FileMenu";
-import { sampleMessages } from "../constants/SampleData";
 import MessageComponent from "../components/shared/MessageComponent";
+import { InputBox } from "../components/styles/styledComponents";
+import { NEW_MESSAGE } from "../constants/events";
+import { useErrors, useSocketEvents } from "../hooks/hook";
+import { useChatDetailsQuery, useGetMessagesQuery } from "../redux/api/api";
 import { GetSocket } from "../socket";
+import { useInfiniteScrollTop } from "6pp";
 
-const user = {
-  _id: "mymsg",
-  name: "sneh soni",
-};
-
-const Chat = () => {
+const Chat = ({ chatId, user }) => {
   const containerRef = useRef(null);
-  const [message, setMessage] = useState("");
-
   const socket = GetSocket();
+
+  const [message, setMessage] = useState("");
+  const [page, setPage] = useState(1);
+  const [messages, setMessages] = useState([]);
+
+  const chatDetails = useChatDetailsQuery({ chatId, skip: !chatId });
+  const oldMessagesChunk = useGetMessagesQuery({ chatId, page });
+  const { data: oldMessages, setData: setOldMessages } = useInfiniteScrollTop(
+    containerRef,
+    oldMessagesChunk?.data?.totalPages,
+    page,
+    setPage,
+    oldMessagesChunk?.data?.messages
+  );
+
+  const allMessages = [...oldMessages, ...messages];
+  const members = chatDetails.data?.chat?.members;
+  const errors = [
+    { isError: chatDetails.isError, error: chatDetails.error },
+    { isError: oldMessagesChunk.isError, error: oldMessagesChunk.error },
+  ];
 
   const submitHandler = (e) => {
     e.preventDefault();
 
     if (!message.trim()) return;
+
+    socket.emit(NEW_MESSAGE, { chatId, members, message });
+
+    setMessage("");
   };
 
-  return (
+  const newMessageHandler = useCallback((data) => {
+    setMessages((prev) => [...prev, data.message]);
+  }, []);
+
+  const eventsArr = { [NEW_MESSAGE]: newMessageHandler };
+  useSocketEvents(socket, eventsArr);
+  useErrors(errors);
+
+  return chatDetails.isLoading ? (
+    <Skeleton />
+  ) : (
     <Box paddingX={"0.25rem"} height={"100%"} width={"100%"}>
       <Box height={"100%"} width={"100%"} bgcolor={"rgba(0,0,0,0.05)"}>
         <Stack
@@ -43,7 +74,7 @@ const Chat = () => {
             overflowY: "auto",
           }}
         >
-          {sampleMessages.map((message) => (
+          {allMessages.map((message) => (
             <MessageComponent key={message._id} message={message} user={user} />
           ))}
         </Stack>

@@ -19,6 +19,7 @@ const MessageComponent = ({ message, user }) => {
         borderRadius: "0.25rem",
         color: "black",
         width: attachments.length > 0 ? "45%" : "fit-content",
+        maxWidth: "45%",
         height: "fit-content",
         overflowWrap: "break-word",
         wordBreak: "break-word",
