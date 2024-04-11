@@ -25,8 +25,10 @@ const fileFormat = (url = "") => {
   return "file";
 };
 
-const transformImage = (url = "", width = 100) => {
-  return url;
+// Fix url issue
+const transformImage = (url = "", width = 150) => {
+  const newUrl = url.replace("upload/", `upload/dpr_auto/w_${width}`);
+  return newUrl;
 };
 
 const getLast7Days = () => {

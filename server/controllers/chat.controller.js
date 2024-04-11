@@ -1,4 +1,8 @@
-import { deleteFilesFromCloudinary, emitEvent } from "../utils/features.js";
+import {
+  deleteFilesFromCloudinary,
+  emitEvent,
+  uploadFilesToCloudinary,
+} from "../utils/features.js";
 import { TryCatch } from "../middlewares/error.middleware.js";
 import { ErrorHandler } from "../utils/utility.js";
 import { Chat } from "../models/chat.model.js";
@@ -227,9 +231,7 @@ const sendAttachments = TryCatch(async (req, res, next) => {
       new ErrorHandler("maximum number of attachments can be 5", 400)
     );
 
-  // cloudinary
-
-  const attachments = [];
+  const attachments = await uploadFilesToCloudinary(files);
 
   const messageForRT = {
     content: "",
