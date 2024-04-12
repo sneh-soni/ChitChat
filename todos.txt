@@ -5,7 +5,9 @@ searchPeople and Notifications close buttons
 profile photo with whom chatting in chat
 AI chat
 Not found page
-
+message delete
+delete chat
+clear chat history
 
 
 

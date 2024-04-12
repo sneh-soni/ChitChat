@@ -28,6 +28,7 @@ const Chat = ({ chatId, user }) => {
 
   const chatDetails = useChatDetailsQuery({ chatId, skip: !chatId });
   const oldMessagesChunk = useGetMessagesQuery({ chatId, page });
+
   const { data: oldMessages, setData: setOldMessages } = useInfiniteScrollTop(
     containerRef,
     oldMessagesChunk?.data?.totalPages,
@@ -83,8 +84,12 @@ const Chat = ({ chatId, user }) => {
             overflowY: "auto",
           }}
         >
-          {allMessages.map((message) => (
-            <MessageComponent key={message._id} message={message} user={user} />
+          {allMessages.map((message, index) => (
+            <MessageComponent
+              key={message._id || index}
+              message={message}
+              user={user}
+            />
           ))}
         </Stack>
         <form

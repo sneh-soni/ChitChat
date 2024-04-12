@@ -1,16 +1,15 @@
-import { Menu, MenuList, MenuItem, Tooltip, ListItemText } from "@mui/material";
-import React, { useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setIsFileMenu, setIsUploadingLoader } from "../../redux/reducers/misc";
 import {
   AudioFile as AudioFileIcon,
   Image as ImageIcon,
-  TonalitySharp,
   UploadFile as UploadFileIcon,
   VideoFile as VideoFileIcon,
 } from "@mui/icons-material";
+import { ListItemText, Menu, MenuItem, MenuList, Tooltip } from "@mui/material";
+import React, { useRef } from "react";
 import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
 import { useSendAttachmentsMutation } from "../../redux/api/api";
+import { setIsFileMenu, setIsUploadingLoader } from "../../redux/reducers/misc";
 
 const FileMenu = ({ anchor, chatId }) => {
   const dispatch = useDispatch();
@@ -50,7 +49,9 @@ const FileMenu = ({ anchor, chatId }) => {
       if (res.data) {
         toast.success(`${key} sent successfully`, { id: toastId });
       } else {
-        toast.error(`Failed to send ${key}`, { id: toastId });
+        toast.error(res.error?.data?.message || `Failed to send ${key}`, {
+          id: toastId,
+        });
       }
     } catch (error) {
       toast.error(error, { id: toastId });

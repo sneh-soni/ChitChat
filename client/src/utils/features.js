@@ -25,9 +25,8 @@ const fileFormat = (url = "") => {
   return "file";
 };
 
-// Fix url issue
 const transformImage = (url = "", width = 150) => {
-  const newUrl = url.replace("upload/", `upload/dpr_auto/w_${width}`);
+  const newUrl = url.replace("upload/", `upload/dpr_auto/w_${width}/`);
   return newUrl;
 };
 

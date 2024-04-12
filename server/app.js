@@ -27,6 +27,7 @@ const server = createServer(app);
 const io = new Server(server, {
   cors: corsOptions,
 });
+app.set("io", io);
 const port = process.env.PORT || 3000;
 export const userSocketIDs = new Map();
 
