@@ -37,7 +37,7 @@ const ChatItem = ({
         <Stack>
           <Typography>{name}</Typography>
           {newMessageAlert && (
-            <Typography>
+            <Typography fontSize={"0.65rem"}>
               {newMessageAlert.count}{" "}
               {newMessageAlert.count > 1 ? "New Messages" : "New Message"}
             </Typography>
