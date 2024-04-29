@@ -26,6 +26,10 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import AvatarCard from "../components/shared/AvatarCard";
 import { sampleChat, sampleUsers } from "../constants/SampleData";
 import UserItem from "../components/shared/UserItem";
+import { useMyGroupsQuery } from "../redux/api/api";
+import { useErrors } from "../hooks/hook";
+import { LayoutLoader } from "../components/Layout/Loaders";
+
 const ConfirmDeleteDialog = lazy(() =>
   import("../components/dialog/ConfirmDeleteDialog")
 );
@@ -40,11 +44,22 @@ const Groups = () => {
 
   const chatId = useSearchParams()[0].get("group");
 
+  const myGroups = useMyGroupsQuery();
+
   const [isMobileMenu, setIsMobileMenu] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [groupName, setGroupName] = useState("");
   const [groupNameUpdated, setGroupNameUpdated] = useState("");
   const [confirmDeleteDialog, setConfirmDeleteDialog] = useState(false);
+
+  const errors = [
+    {
+      isError: myGroups.isError,
+      error: myGroups.error,
+    },
+  ];
+
+  useErrors(errors);
 
   const handleMobile = () => {};
 
@@ -185,7 +200,9 @@ const Groups = () => {
     </>
   );
 
-  return (
+  return myGroups.isLoading ? (
+    <LayoutLoader />
+  ) : (
     <Grid container height={"100vh"}>
       <Grid item sm={4} sx={{ display: { xs: "none", sm: "block" } }}>
         <GroupsList

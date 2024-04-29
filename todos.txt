@@ -8,6 +8,7 @@ Not found page
 message delete
 delete chat
 clear chat history
+header icons dialog boxes width on mobile devices fix
 
 
 

@@ -1,4 +1,12 @@
 import {
+  Add as AddIcon,
+  Group as GroupIcon,
+  Logout as LogoutIcon,
+  Menu as MenuIcon,
+  Notifications as NotificationsIcon,
+  Search as SearchIcon,
+} from "@mui/icons-material";
+import {
   AppBar,
   Backdrop,
   Badge,
@@ -8,28 +16,21 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import React, { Suspense, lazy, startTransition, useState } from "react";
-import { HEADER_COLOR } from "../../constants/ColorConstants.js";
-import {
-  Menu as MenuIcon,
-  Search as SearchIcon,
-  Add as AddIcon,
-  Group as GroupIcon,
-  Logout as LogoutIcon,
-  Notifications as NotificationsIcon,
-} from "@mui/icons-material";
-import { useNavigate } from "react-router-dom";
-import ChatIcon from "../../constants/LogoSvg.jsx";
 import axios from "axios";
+import React, { Suspense, lazy, startTransition } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { HEADER_COLOR } from "../../constants/ColorConstants.js";
+import ChatIcon from "../../constants/LogoSvg.jsx";
 import { userNotExists } from "../../redux/reducers/auth.js";
+import { resetNotification } from "../../redux/reducers/chat.js";
 import {
   setIsMobile,
-  setIsSearch,
+  setIsNewGroup,
   setIsNotification,
+  setIsSearch,
 } from "../../redux/reducers/misc.js";
-import { resetNotification } from "../../redux/reducers/chat.js";
 
 const SearchDialog = lazy(() => import("../specific/Search.jsx"));
 const NotificationsDialog = lazy(() => import("../specific/Notifications.jsx"));
@@ -55,19 +56,20 @@ const IconBtn = ({ title, onClick, icon, value }) => {
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isSearch, isNotification } = useSelector((store) => store.misc);
+  const { isSearch, isNotification, isNewGroup } = useSelector(
+    (store) => store.misc
+  );
   const { notificationCount } = useSelector((store) => store.chat);
 
   const handleMobile = () => dispatch(setIsMobile(true));
+
   const openNotification = () => {
     dispatch(setIsNotification(true));
     dispatch(resetNotification());
   };
   const openSearch = () => dispatch(setIsSearch(true));
 
-  const openNewGroup = () => {
-    setIsNewGroup((prev) => !prev);
-  };
+  const openNewGroup = () => dispatch(setIsNewGroup(true));
 
   const logoutHandler = async () => {
     try {
@@ -90,8 +92,6 @@ const Header = () => {
       navigate("/groups");
     });
   };
-
-  const [isNewGroup, setIsNewGroup] = useState(false);
 
   return (
     <>
