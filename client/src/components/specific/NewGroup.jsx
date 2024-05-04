@@ -24,7 +24,7 @@ const NewGroup = () => {
   const { isNewGroup } = useSelector((store) => store.misc);
 
   const { isError, isLoading, error, data } = useAvailableFriendsQuery();
-  const [newGroup, isLoadingNewGroup] = useAsyncMutation(useNewGroupMutation());
+  const [newGroup, isLoadingNewGroup] = useAsyncMutation(useNewGroupMutation);
 
   const groupName = useInputValidation("");
   const [selectedMembers, setSelectedMembers] = useState([]);
