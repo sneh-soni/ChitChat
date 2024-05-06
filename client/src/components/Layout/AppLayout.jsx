@@ -1,7 +1,7 @@
 import { Drawer, Grid, Skeleton } from "@mui/material";
 import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useErrors, useSocketEvents } from "../../hooks/hook";
 import { useMyChatsQuery } from "../../redux/api/api";
 import { setIsMobile } from "../../redux/reducers/misc";
@@ -24,6 +24,7 @@ import { getOrSaveFromLocalStorage } from "../../utils/features";
 const AppLayout = () => (WrappedComponent) => {
   return (props) => {
     const params = useParams();
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const chatId = params.chatId;
     const socket = GetSocket();
@@ -61,7 +62,8 @@ const AppLayout = () => (WrappedComponent) => {
 
     const refetchListener = useCallback(() => {
       refetch();
-    }, [refetch]);
+      navigate("/");
+    }, [refetch, navigate]);
 
     const eventsArr = {
       [NEW_MESSAGE_ALERT]: newMessageAlertListener,

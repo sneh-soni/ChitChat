@@ -144,7 +144,7 @@ const removeMember = TryCatch(async (req, res, next) => {
 
   if (chat.creator.toString() !== req.user.toString())
     return next(
-      new ErrorHandler("Only Admin is allowed to add new members", 403)
+      new ErrorHandler("Only Admin is allowed to remove members", 403)
     );
 
   if (chat.members.length <= 3)
@@ -152,6 +152,8 @@ const removeMember = TryCatch(async (req, res, next) => {
 
   if (!chat.members.includes(userId.toString()))
     return next(new ErrorHandler("User not found in group", 400));
+
+  const allMembers = chat.members.map((i) => i.toString());
 
   chat.members = chat.members.filter(
     (i) => i.toString() !== user._id.toString()
@@ -161,7 +163,7 @@ const removeMember = TryCatch(async (req, res, next) => {
 
   emitEvent(req, ALERT, chat.members, `${user.name} has been removed`);
 
-  emitEvent(req, REFETCH_CHATS, chat.members);
+  emitEvent(req, REFETCH_CHATS, allMembers);
 
   return res.status(200).json({
     success: true,
@@ -374,6 +376,15 @@ const getMessages = TryCatch(async (req, res, next) => {
   const limit = 20;
 
   const skip = (page - 1) * limit;
+
+  const chat = await Chat.findById(chatId);
+
+  if (!chat) return next(new ErrorHandler("Chat not found", 404));
+
+  if (!chat.members.includes(req.user.toString()))
+    return next(
+      new ErrorHandler("You are not allowed to access this chat", 403)
+    );
 
   const [messages, totalMessages] = await Promise.all([
     Message.find({ chat: chatId })

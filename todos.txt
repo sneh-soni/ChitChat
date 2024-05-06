@@ -1,23 +1,21 @@
 Password opener eye in login signup forms
 loading shimmer after login/signup in forms
 hide vertical scrollbars
-searchPeople and Notifications close buttons
-profile photo with whom chatting in chat
+searchPeople and Notifications dialogs size fix (font and width) for mobile and add close buttons
+profile photo and name at the top of chat of whom chatting in chat
 AI chat
 Not found page
 message delete
-delete chat
 clear chat history
 header icons dialog boxes width on mobile devices fix
 avatar can be empty at the time of register at first
 avatar, uername, password change feature
+unfriend api
 
 
 
 // Errors
 
-on login/register the user is not updating in redux store as it is entered ==>
-it is only true at first, but after reloading the page it is getting updated to actual info
+on login/register the user is not updating in redux store as it is entered ==> it is only true at first, but after reloading the page it is getting updated to actual info
 Register api not working ==> database entry working 
-
-// if something goes wrong around newGroup/Groups ==> maybe solution around 5hr 40min of pt.3
+ALERT socket event not working ==> when member is added or removed from group

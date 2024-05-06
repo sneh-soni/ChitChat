@@ -89,7 +89,7 @@ const NewGroup = () => {
           </Button>
           <Button
             variant="contained"
-            color="success"
+            color="warning"
             onClick={submitHandler}
             disabled={isLoadingNewGroup}
           >
