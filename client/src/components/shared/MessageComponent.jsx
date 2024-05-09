@@ -5,13 +5,16 @@ import { AvTimer } from "@mui/icons-material";
 import { fileFormat } from "../../utils/features";
 import RenderAttachment from "./RenderAttachment";
 import { HEADER_COLOR } from "../../constants/ColorConstants";
+import { motion } from "framer-motion";
 
 const MessageComponent = ({ message, user }) => {
   const { content, sender, attachments = [], createdAt } = message;
   const sameSender = sender?._id === user._id;
   const timeAgo = moment(createdAt).fromNow();
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, x: "-100%" }}
+      animate={{ opacity: 1, x: 0 }}
       style={{
         alignSelf: sameSender ? "flex-end" : "flex-start",
         backgroundColor: sameSender ? "rgba(0,0,0,0.2)" : HEADER_COLOR,
@@ -80,7 +83,7 @@ const MessageComponent = ({ message, user }) => {
           {timeAgo}
         </Typography>
       </Stack>
-    </div>
+    </motion.div>
   );
 };
 

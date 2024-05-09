@@ -1,10 +1,14 @@
 import { Drawer, Grid, Skeleton } from "@mui/material";
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { useErrors, useSocketEvents } from "../../hooks/hook";
 import { useMyChatsQuery } from "../../redux/api/api";
-import { setIsMobile } from "../../redux/reducers/misc";
+import {
+  setIsDeleteMenu,
+  setIsMobile,
+  setSelectedDeleteChat,
+} from "../../redux/reducers/misc";
 import Title from "../shared/Title";
 import ChatList from "../specific/ChatList";
 import Profile from "../specific/Profile";
@@ -20,6 +24,7 @@ import {
   setNewMessagesAlert,
 } from "../../redux/reducers/chat";
 import { getOrSaveFromLocalStorage } from "../../utils/features";
+import DeleteChatMenu from "../dialog/DeleteChatMenu";
 
 const AppLayout = () => (WrappedComponent) => {
   return (props) => {
@@ -28,6 +33,7 @@ const AppLayout = () => (WrappedComponent) => {
     const dispatch = useDispatch();
     const chatId = params.chatId;
     const socket = GetSocket();
+    const deleteMenuAnchor = useRef(null);
 
     const { isMobile } = useSelector((store) => store.misc);
     const { user } = useSelector((store) => store.auth);
@@ -44,7 +50,11 @@ const AppLayout = () => (WrappedComponent) => {
       });
     }, [newMessagesAlert]);
 
-    const handleDeleteChat = () => {};
+    const handleDeleteChat = (e, chatId, groupChat) => {
+      dispatch(setIsDeleteMenu(true));
+      dispatch(setSelectedDeleteChat({ chatId, groupChat }));
+      deleteMenuAnchor.current = e.currentTarget;
+    };
 
     const handleMobileClose = () => dispatch(setIsMobile(false));
 
@@ -76,6 +86,11 @@ const AppLayout = () => (WrappedComponent) => {
       <>
         <Title />
         <Header />
+
+        <DeleteChatMenu
+          dispatch={dispatch}
+          deleteMenuAnchor={deleteMenuAnchor}
+        />
 
         {isLoading ? (
           <Skeleton />

@@ -107,10 +107,8 @@ const Chat = ({ chatId, user }) => {
   }, [messages]);
 
   useEffect(() => {
-    if (!chatDetails.data?.chat) {
-      navigate("/");
-    }
-  }, [chatDetails.data]);
+    if (chatDetails.isError) return navigate("/");
+  }, [chatDetails.isError]);
 
   const newMessageListener = useCallback(
     (data) => {

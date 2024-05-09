@@ -6,11 +6,11 @@ profile photo and name at the top of chat of whom chatting in chat
 AI chat
 Not found page
 message delete
-clear chat history
+clear chat 
 header icons dialog boxes width on mobile devices fix
 avatar can be empty at the time of register at first
 avatar, uername, password change feature
-unfriend api
+if there is no message in chat show "Say Hi to ${name}"
 
 
 
@@ -19,3 +19,4 @@ unfriend api
 on login/register the user is not updating in redux store as it is entered ==> it is only true at first, but after reloading the page it is getting updated to actual info
 Register api not working ==> database entry working 
 ALERT socket event not working ==> when member is added or removed from group
+Multiple friend request error
