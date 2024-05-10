@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useFileHandler, useInputValidation, useStrongPassword } from "6pp";
+import { CameraAlt } from "@mui/icons-material";
 import {
   Avatar,
   Button,
@@ -9,18 +10,18 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { CameraAlt } from "@mui/icons-material";
-import { VisuallyHiddenInput } from "../components/styles/styledComponents";
-import { useFileHandler, useInputValidation, useStrongPassword } from "6pp";
-import { usernameValidator } from "../utils/validators";
-import { LOGIN_PAGE_BG_STYLES } from "../constants/BackgroundConstants";
-import { useDispatch } from "react-redux";
-import { userExists } from "../redux/reducers/auth";
-import toast from "react-hot-toast";
 import axios from "axios";
+import React, { useState } from "react";
+import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { VisuallyHiddenInput } from "../components/styles/styledComponents";
+import { LOGIN_PAGE_BG_STYLES } from "../constants/BackgroundConstants";
+import { userExists } from "../redux/reducers/auth";
+import { usernameValidator } from "../utils/validators";
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const username = useInputValidation("", usernameValidator);
   const fullname = useInputValidation("");
   const bio = useInputValidation("");
@@ -28,9 +29,11 @@ const Login = () => {
   const avatar = useFileHandler("single");
 
   const dispatch = useDispatch();
+
   const handleLogin = async (e) => {
     e.preventDefault();
-
+    setIsLoading(true);
+    const toastId = toast.loading("Logging in...");
     try {
       const { data } = await axios.post(
         process.env.REACT_APP_SERVER + `/api/v1/users/login`,
@@ -45,16 +48,21 @@ const Login = () => {
           },
         }
       );
-      dispatch(userExists(true));
-      toast.success(data.message);
+      dispatch(userExists(data.user));
+      toast.success(data.message, { id: toastId });
     } catch (error) {
-      toast.error(error?.response?.data?.message || "Something went wrong");
+      toast.error(error?.response?.data?.message || "Something went wrong", {
+        id: toastId,
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleSignup = async (e) => {
     e.preventDefault();
-
+    setIsLoading(true);
+    const toastId = toast.loading("Signing up...");
     const formData = new FormData();
     formData.append("username", username.value);
     formData.append("fullname", fullname.value);
@@ -73,10 +81,14 @@ const Login = () => {
           },
         }
       );
-      dispatch(userExists(true));
-      toast.success(data.message);
+      dispatch(userExists(data.user));
+      toast.success(data.message, { id: toastId });
     } catch (error) {
-      toast.error(error?.response?.data?.message || "Something went wrong");
+      toast.error(error?.response?.data?.message || "Something went wrong", {
+        id: toastId,
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -111,6 +123,7 @@ const Login = () => {
                   label="username"
                   margin="normal"
                   variant="filled"
+                  disabled={isLoading}
                   color="warning"
                   value={username.value}
                   onChange={username.changeHandler}
@@ -121,6 +134,7 @@ const Login = () => {
                   type="password"
                   label="password"
                   margin="normal"
+                  disabled={isLoading}
                   color="warning"
                   variant="filled"
                   value={password.value}
@@ -134,6 +148,7 @@ const Login = () => {
                     color="warning"
                     sx={{ marginTop: "1rem" }}
                     onClick={() => setIsLogin(false)}
+                    disabled={isLoading}
                   >
                     register
                   </Button>
@@ -142,6 +157,7 @@ const Login = () => {
                     color="warning"
                     variant="contained"
                     sx={{ marginTop: "1rem" }}
+                    disabled={isLoading}
                   >
                     sign in
                   </Button>
@@ -197,6 +213,7 @@ const Login = () => {
                       <CameraAlt />
                       <VisuallyHiddenInput
                         type="file"
+                        disabled={isLoading}
                         onChange={avatar.changeHandler}
                       />
                     </>
@@ -206,6 +223,7 @@ const Login = () => {
                   required
                   fullWidth
                   label="fullname"
+                  disabled={isLoading}
                   margin="normal"
                   variant="standard"
                   color="warning"
@@ -215,6 +233,7 @@ const Login = () => {
                 <TextField
                   required
                   fullWidth
+                  disabled={isLoading}
                   label="something about yourself"
                   color="warning"
                   margin="normal"
@@ -224,6 +243,7 @@ const Login = () => {
                 />
                 <TextField
                   required
+                  disabled={isLoading}
                   fullWidth
                   label="username"
                   margin="normal"
@@ -243,6 +263,7 @@ const Login = () => {
                   fullWidth
                   type="password"
                   label="password"
+                  disabled={isLoading}
                   color="warning"
                   margin="normal"
                   variant="standard"
@@ -262,6 +283,7 @@ const Login = () => {
                     color="warning"
                     sx={{ marginTop: "1rem" }}
                     onClick={() => setIsLogin(true)}
+                    disabled={isLoading}
                   >
                     login
                   </Button>
@@ -270,6 +292,7 @@ const Login = () => {
                     color="warning"
                     variant="contained"
                     sx={{ marginTop: "1rem" }}
+                    disabled={isLoading}
                   >
                     sign up
                   </Button>

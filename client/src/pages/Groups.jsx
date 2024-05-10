@@ -14,6 +14,7 @@ import {
   Grid,
   IconButton,
   ListItem,
+  Skeleton,
   Stack,
   TextField,
   Tooltip,
@@ -98,6 +99,10 @@ const Groups = () => {
       setIsEdit(false);
     };
   }, [groupDetails.data]);
+
+  useEffect(() => {
+    if (groupDetails.isError) navigate("/");
+  }, [groupDetails.isError]);
 
   const handleMobile = () => {};
 
@@ -404,7 +409,6 @@ const GroupListItem = memo(({ group, chatId, setIsMobileMenu }) => {
           display: "flex",
           gap: "1rem",
           alignItems: "center",
-          borderRadius: "0.2rem",
           padding: "0.5rem",
           color: "black",
         }}

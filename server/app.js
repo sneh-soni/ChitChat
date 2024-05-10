@@ -10,6 +10,7 @@ import cors from "cors";
 import { v2 as cloudinary } from "cloudinary";
 import { corsOptions } from "./constants/config.js";
 import {
+  ALERT,
   NEW_MESSAGE,
   NEW_MESSAGE_ALERT,
   START_TYPING,

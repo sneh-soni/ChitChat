@@ -1,5 +1,4 @@
 Password opener eye in login signup forms
-loading shimmer after login/signup in forms
 hide vertical scrollbars
 searchPeople and Notifications dialogs size fix (font and width) for mobile and add close buttons
 profile photo and name at the top of chat of whom chatting in chat
@@ -15,8 +14,5 @@ if there is no message in chat show "Say Hi to ${name}"
 
 
 // Errors
-
-on login/register the user is not updating in redux store as it is entered ==> it is only true at first, but after reloading the page it is getting updated to actual info
-Register api not working ==> database entry working 
 ALERT socket event not working ==> when member is added or removed from group
-Multiple friend request error
+deleteFilesFromCloudinary() ==> Not made

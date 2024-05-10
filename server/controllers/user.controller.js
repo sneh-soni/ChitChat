@@ -123,6 +123,15 @@ const sendFriendRequest = TryCatch(async (req, res, next) => {
 
   if (request) return next(new ErrorHandler("Request already sent", 400));
 
+  const chat = await Chat.findOne({
+    members: {
+      $size: 2,
+      $all: [req.user, userId],
+    },
+  });
+
+  if (chat) return next(new ErrorHandler("Already friends", 400));
+
   await Request.create({
     sender: req.user,
     receiver: userId,

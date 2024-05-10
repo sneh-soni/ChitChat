@@ -10,13 +10,12 @@ import {
 } from "@mui/material";
 import React, { memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useErrors } from "../../hooks/hook";
+import { useAsyncMutation, useErrors } from "../../hooks/hook";
 import {
   useAcceptFriendRequestMutation,
   useGetNotificationsQuery,
 } from "../../redux/api/api";
 import { setIsNotification } from "../../redux/reducers/misc";
-import toast from "react-hot-toast";
 
 const NotificationItem = memo(({ sender, _id, handler }) => {
   const { name, avatar } = sender;
@@ -28,7 +27,7 @@ const NotificationItem = memo(({ sender, _id, handler }) => {
         spacing={"1rem"}
         width={"100%"}
       >
-        <Avatar />
+        <Avatar alt={name} src={avatar} />
         <Stack>
           <Typography
             variant="body1"
@@ -61,7 +60,7 @@ const NotificationItem = memo(({ sender, _id, handler }) => {
             Reject
           </Button>
           <Button
-            color="success"
+            color="warning"
             variant="contained"
             size="small"
             onClick={() => handler({ _id, accept: true })}
@@ -78,29 +77,17 @@ const Notifications = () => {
   const dispatch = useDispatch();
   const { isLoading, data, error, isError } = useGetNotificationsQuery();
   const { isNotification } = useSelector((store) => store.misc);
-  const [acceptRequest] = useAcceptFriendRequestMutation();
+  const [acceptRequest] = useAsyncMutation(useAcceptFriendRequestMutation);
 
   useErrors([{ error, isError }]);
 
   const closeHandler = () => dispatch(setIsNotification(false));
 
   const friendRequestHandler = async ({ _id, accept }) => {
-    try {
-      const res = await acceptRequest({
-        requestId: _id,
-        accept,
-      });
-
-      if (res.data?.success) {
-        toast.success(res.data.message);
-      } else {
-        toast.error(res?.error?.data?.message || "Something went wrong");
-      }
-    } catch (error) {
-      toast.error("Something went wrong");
-      console.log(error);
-    }
-
+    await acceptRequest(`${accept ? "Accepting.." : "Rejecting.."}`, {
+      requestId: _id,
+      accept,
+    });
     dispatch(setIsNotification(false));
   };
 

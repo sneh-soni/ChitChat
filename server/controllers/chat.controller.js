@@ -21,14 +21,18 @@ const newGroupChat = TryCatch(async (req, res, next) => {
 
   const allMembers = [...members, req.user];
 
-  await Chat.create({
+  const chat = await Chat.create({
     name,
     groupChat: true,
     creator: req.user,
     members: allMembers,
   });
 
-  emitEvent(req, ALERT, allMembers, `Welcome to ${name} group`);
+  emitEvent(req, ALERT, allMembers, {
+    message: `Welcome to ${name} group`,
+    chatId: chat._id,
+  });
+
   emitEvent(req, REFETCH_CHATS, members);
 
   return res.status(201).json({
@@ -116,7 +120,10 @@ const addMembers = TryCatch(async (req, res, next) => {
 
   const allUsersName = allNewMembers.map(({ name }) => name).join(",");
 
-  emitEvent(req, ALERT, chat.members, `${allUsersName} has been added`);
+  emitEvent(req, ALERT, chat.members, {
+    message: `${allUsersName} has been added`,
+    chatId,
+  });
 
   emitEvent(req, REFETCH_CHATS, chat.members);
 
@@ -161,7 +168,10 @@ const removeMember = TryCatch(async (req, res, next) => {
 
   await chat.save();
 
-  emitEvent(req, ALERT, chat.members, `${user.name} has been removed`);
+  emitEvent(req, ALERT, chat.members, {
+    message: `${user.name} has been removed`,
+    chatId,
+  });
 
   emitEvent(req, REFETCH_CHATS, allMembers);
 
@@ -205,7 +215,10 @@ const leaveGroup = TryCatch(async (req, res, next) => {
     chat.save(),
   ]);
 
-  emitEvent(req, ALERT, chat.members, `${user.name} has left the group`);
+  emitEvent(req, ALERT, chat.members, {
+    message: `${user.name} has left the group`,
+    chatId,
+  });
 
   return res.status(200).json({
     success: true,
