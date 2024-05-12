@@ -14,7 +14,7 @@ import { adminLoginValidator, validateHandler } from "../lib/validators.js";
 const router = express.Router();
 
 router.post("/admin-login", adminLoginValidator(), validateHandler, adminLogin);
-router.post("/admin-logout", adminLogout);
+router.get("/admin-logout", adminLogout);
 
 router.use(isAdmin);
 
