@@ -57,6 +57,7 @@ const LineChart = ({ value = [] }) => {
     labels: last7Days,
     datasets: [
       {
+        label: "Messages",
         data: value,
         fill: true,
         backgroundColor: "rgba(255, 193, 7, 0.2)",

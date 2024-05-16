@@ -1,11 +1,12 @@
+import { useFetchData } from "6pp";
+import { Avatar, Box, Skeleton, Stack } from "@mui/material";
+import moment from "moment";
 import React, { useEffect, useState } from "react";
 import AdminLayout from "../../components/Layout/AdminLayout";
-import Table from "../../components/shared/Table";
-import { Avatar, Box, Stack } from "@mui/material";
-import { dashboardData } from "../../constants/SampleData";
-import { fileFormat, transformImage } from "../../utils/features";
-import moment from "moment";
 import RenderAttachment from "../../components/shared/RenderAttachment";
+import Table from "../../components/shared/Table";
+import { useErrors } from "../../hooks/hook";
+import { fileFormat, transformImage } from "../../utils/features";
 
 const columns = [
   {
@@ -82,29 +83,49 @@ const columns = [
 ];
 
 const MessageMangement = () => {
+  const { data, loading, error } = useFetchData(
+    process.env.REACT_APP_SERVER + "/api/v1/admin/all-messages",
+    "dashboard-messages"
+  );
+
+  useErrors([
+    {
+      isError: error,
+      error: error,
+    },
+  ]);
+
+  console.log(data);
+
   const [rows, setRows] = useState([]);
   useEffect(() => {
-    setRows(
-      dashboardData.messages.map((i) => ({
-        ...i,
-        id: i._id,
-        sender: {
-          name: i.sender.name,
-          avatar: transformImage(i.sender.avatar, 50),
-        },
-        groupChat: i.groupChat ? "Yes" : "No",
-        createdAt: moment(i.createdAt).format("MMMM Do YYYY, h:mm:ss a"),
-      }))
-    );
-  }, []);
+    if (data) {
+      setRows(
+        data.transformedMessages.map((i) => ({
+          ...i,
+          id: i._id,
+          sender: {
+            name: i.sender.name,
+            avatar: transformImage(i.sender.avatar, 50),
+          },
+          groupChat: i.groupChat ? "Yes" : "No",
+          createdAt: moment(i.createdAt).format("MMMM Do YYYY, h:mm:ss a"),
+        }))
+      );
+    }
+  }, [data]);
   return (
     <AdminLayout>
-      <Table
-        heading={"All Messages"}
-        rows={rows}
-        columns={columns}
-        rowHeight={200}
-      />
+      {loading ? (
+        <Skeleton height={"100vh"} />
+      ) : (
+        <Table
+          heading={"All Messages"}
+          rows={rows}
+          columns={columns}
+          rowHeight={200}
+        />
+      )}
     </AdminLayout>
   );
 };

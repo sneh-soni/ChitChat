@@ -26,7 +26,6 @@ const chatSlice = createSlice({
       state.notificationCount = 0;
     },
     setNewMessagesAlert: (state, action) => {
-      console.log("action", action.payload.chatId);
       const index = state.newMessagesAlert.findIndex(
         (obj) => obj.chatId === action.payload
       );

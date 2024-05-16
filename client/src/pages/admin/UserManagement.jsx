@@ -1,22 +1,17 @@
-import { Avatar } from "@mui/material";
+import { useFetchData } from "6pp";
+import { Avatar, Skeleton } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import AdminLayout from "../../components/Layout/AdminLayout";
 import Table from "../../components/shared/Table";
-import { dashboardData } from "../../constants/SampleData";
+import { useErrors } from "../../hooks/hook";
 import { transformImage } from "../../utils/features";
 
 const columns = [
   {
-    field: "id",
-    headerName: "ID",
-    width: 120,
-    headerClassName: "table-header",
-  },
-  {
     field: "avatar",
     headerName: "Avatar",
     headerClassName: "table-header",
-    width: 150,
+    width: 100,
     renderCell: (params) => (
       <Avatar alt={params.row.name} src={params.row.avatar} />
     ),
@@ -36,31 +31,57 @@ const columns = [
   {
     field: "friends",
     headerName: "Friends",
-    width: 150,
+    width: 100,
     headerClassName: "table-header",
   },
   {
     field: "groups",
     headerName: "Groups",
-    width: 150,
+    width: 100,
+    headerClassName: "table-header",
+  },
+  {
+    field: "id",
+    headerName: "ID",
+    width: 250,
     headerClassName: "table-header",
   },
 ];
 
 const UserManagement = () => {
+  const { data, loading, error } = useFetchData(
+    process.env.REACT_APP_SERVER + "/api/v1/admin/all-users",
+    "dashboard-users"
+  );
+
+  useErrors([
+    {
+      isError: error,
+      error: error,
+    },
+  ]);
+
   const [rows, setRows] = useState([]);
+
   useEffect(() => {
-    setRows(
-      dashboardData.users.map((user) => ({
-        ...user,
-        id: user._id,
-        avatar: transformImage(user.avatar, 50),
-      }))
-    );
-  }, []);
+    if (data) {
+      setRows(
+        data.transformedUsers.map((user) => ({
+          ...user,
+          id: user._id,
+          avatar: transformImage(user.avatar, 50),
+        }))
+      );
+    }
+  }, [data]);
+
   return (
     <AdminLayout>
-      <Table rows={rows} columns={columns} heading={"All Users"} />
+      {loading ? (
+        <Skeleton height={"100vh"} />
+      ) : (
+        <Table rows={rows} columns={columns} heading={"All Users"} />
+      )}
     </AdminLayout>
   );
 };

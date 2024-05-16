@@ -20,7 +20,7 @@ const Table = ({ rows, columns, heading, rowHeight = 52 }) => {
         <Typography
           textAlign={"center"}
           variant="h5"
-          sx={{ margin: "2rem", textTransform: "uppercase" }}
+          sx={{ margin: "1rem", textTransform: "uppercase" }}
         >
           {heading}
         </Typography>
@@ -28,7 +28,7 @@ const Table = ({ rows, columns, heading, rowHeight = 52 }) => {
           rows={rows}
           columns={columns}
           rowHeight={rowHeight}
-          style={{ height: "80%" }}
+          style={{ height: "85%" }}
           sx={{
             border: "none",
             ".table-header": {
