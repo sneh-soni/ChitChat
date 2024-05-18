@@ -60,7 +60,7 @@ const columns = [
   },
   {
     field: "id",
-    headerName: "ID",
+    headerName: "Mongo Id",
     width: 260,
     headerClassName: "table-header",
   },

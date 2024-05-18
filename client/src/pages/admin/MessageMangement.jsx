@@ -10,9 +10,9 @@ import { fileFormat, transformImage } from "../../utils/features";
 
 const columns = [
   {
-    field: "id",
-    headerName: "ID",
-    width: 120,
+    field: "content",
+    headerName: "Message content",
+    width: 450,
     headerClassName: "table-header",
   },
   {
@@ -45,39 +45,39 @@ const columns = [
     },
   },
   {
-    field: "content",
-    headerName: "Message content",
-    width: 400,
-    headerClassName: "table-header",
-  },
-  {
     field: "sender",
     headerName: "Sent By",
     headerClassName: "table-header",
-    width: 200,
+    width: 150,
     renderCell: (params) => (
-      <Stack direction={"row"} spacing={"1rem"} alignItems={"center"}>
+      <Stack direction={"row"} spacing={"0.5rem"} alignItems={"center"}>
         <Avatar alt={params.row.sender.name} src={params.row.sender.avatar} />
         <span>{params.row.sender.name}</span>
       </Stack>
     ),
   },
   {
-    field: "chat",
-    headerName: "Chat",
-    width: 150,
-    headerClassName: "table-header",
-  },
-  {
     field: "groupChat",
-    headerName: "Group Chat",
-    width: 150,
+    headerName: "Group",
+    width: 100,
     headerClassName: "table-header",
   },
   {
     field: "createdAt",
     headerName: "Created At",
-    width: 280,
+    width: 250,
+    headerClassName: "table-header",
+  },
+  {
+    field: "id",
+    headerName: "Mongo Id",
+    width: 260,
+    headerClassName: "table-header",
+  },
+  {
+    field: "chat",
+    headerName: "Mongo Chat Id",
+    width: 260,
     headerClassName: "table-header",
   },
 ];
@@ -95,8 +95,6 @@ const MessageMangement = () => {
     },
   ]);
 
-  console.log(data);
-
   const [rows, setRows] = useState([]);
   useEffect(() => {
     if (data) {
@@ -110,6 +108,7 @@ const MessageMangement = () => {
           },
           groupChat: i.groupChat ? "Yes" : "No",
           createdAt: moment(i.createdAt).format("MMMM Do YYYY, h:mm:ss a"),
+          content: i.content.length > 0 ? i.content : "None",
         }))
       );
     }

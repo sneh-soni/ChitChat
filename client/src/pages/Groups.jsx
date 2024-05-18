@@ -385,7 +385,7 @@ const GroupsList = ({ w = "100%", myGroups = [], chatId, setIsMobileMenu }) => {
         ))
       ) : (
         <Typography textAlign={"center"} padding={"1rem"}>
-          You have not created any Groups Yet!
+          No Groups Yet!
         </Typography>
       )}
     </Stack>

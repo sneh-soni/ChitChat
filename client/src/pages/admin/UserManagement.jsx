@@ -42,7 +42,7 @@ const columns = [
   },
   {
     field: "id",
-    headerName: "ID",
+    headerName: "Mongo Id",
     width: 250,
     headerClassName: "table-header",
   },
