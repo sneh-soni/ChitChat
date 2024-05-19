@@ -1,13 +1,10 @@
-Password opener eye in login signup forms
 hide vertical scrollbars
 searchPeople and Notifications dialogs size fix (font and width) for mobile and add close buttons
 profile photo and name at the top of chat of whom chatting in chat
 AI chat
-Not found page
 message delete
 clear chat 
 header icons dialog boxes width on mobile devices fix
-avatar can be empty at the time of register at first
 avatar, uername, password change feature
 if there is no message in chat show "Say Hi to ${name}"
 

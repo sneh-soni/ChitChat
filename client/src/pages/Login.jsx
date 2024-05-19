@@ -1,10 +1,15 @@
-import { useFileHandler, useInputValidation, useStrongPassword } from "6pp";
-import { CameraAlt } from "@mui/icons-material";
+import { useFileHandler, useInputValidation } from "6pp";
+import { CameraAlt, Visibility, VisibilityOff } from "@mui/icons-material";
 import {
   Avatar,
   Button,
   Container,
+  FilledInput,
+  FormControl,
   IconButton,
+  Input,
+  InputAdornment,
+  InputLabel,
   Paper,
   Stack,
   TextField,
@@ -17,18 +22,21 @@ import { useDispatch } from "react-redux";
 import { VisuallyHiddenInput } from "../components/styles/styledComponents";
 import { LOGIN_PAGE_BG_STYLES } from "../constants/BackgroundConstants";
 import { userExists } from "../redux/reducers/auth";
-import { usernameValidator } from "../utils/validators";
+import { passwordValidator, usernameValidator } from "../utils/validators";
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [showPass, setShowPass] = useState(false);
   const username = useInputValidation("", usernameValidator);
   const fullname = useInputValidation("");
   const bio = useInputValidation("");
-  const password = useStrongPassword();
+  const password = useInputValidation("", passwordValidator);
   const avatar = useFileHandler("single");
 
   const dispatch = useDispatch();
+
+  const handleClickShowPassword = () => setShowPass((show) => !show);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -120,7 +128,7 @@ const Login = () => {
                 <TextField
                   required
                   fullWidth
-                  label="username"
+                  label="Username"
                   margin="normal"
                   variant="filled"
                   disabled={isLoading}
@@ -128,18 +136,27 @@ const Login = () => {
                   value={username.value}
                   onChange={username.changeHandler}
                 />
-                <TextField
-                  required
-                  fullWidth
-                  type="password"
-                  label="password"
-                  margin="normal"
-                  disabled={isLoading}
-                  color="warning"
-                  variant="filled"
-                  value={password.value}
-                  onChange={password.changeHandler}
-                />
+                <FormControl margin="normal" fullWidth variant="filled">
+                  <InputLabel color="warning">Password *</InputLabel>
+                  <FilledInput
+                    fullWidth
+                    type={showPass ? "text" : "password"}
+                    disabled={isLoading}
+                    color="warning"
+                    value={password.value}
+                    onChange={password.changeHandler}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          onClick={handleClickShowPassword}
+                          edge="end"
+                        >
+                          {showPass ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                  />
+                </FormControl>
                 <div
                   style={{ display: "flex", justifyContent: "space-between" }}
                 >
@@ -147,7 +164,10 @@ const Login = () => {
                     variant="outlined"
                     color="warning"
                     sx={{ marginTop: "1rem" }}
-                    onClick={() => setIsLogin(false)}
+                    onClick={() => {
+                      setIsLogin(false);
+                      setShowPass(false);
+                    }}
                     disabled={isLoading}
                   >
                     register
@@ -222,7 +242,7 @@ const Login = () => {
                 <TextField
                   required
                   fullWidth
-                  label="fullname"
+                  label="Fullname"
                   disabled={isLoading}
                   margin="normal"
                   variant="standard"
@@ -234,7 +254,7 @@ const Login = () => {
                   required
                   fullWidth
                   disabled={isLoading}
-                  label="something about yourself"
+                  label="Something about yourself.."
                   color="warning"
                   margin="normal"
                   variant="standard"
@@ -245,7 +265,7 @@ const Login = () => {
                   required
                   disabled={isLoading}
                   fullWidth
-                  label="username"
+                  label="Username"
                   margin="normal"
                   color="warning"
                   variant="standard"
@@ -257,19 +277,27 @@ const Login = () => {
                     {username.error}
                   </Typography>
                 )}
-
-                <TextField
-                  required
-                  fullWidth
-                  type="password"
-                  label="password"
-                  disabled={isLoading}
-                  color="warning"
-                  margin="normal"
-                  variant="standard"
-                  value={password.value}
-                  onChange={password.changeHandler}
-                />
+                <FormControl fullWidth margin="normal" variant="standard">
+                  <InputLabel color="warning">Password *</InputLabel>
+                  <Input
+                    fullWidth
+                    type={showPass ? "text" : "password"}
+                    disabled={isLoading}
+                    color="warning"
+                    value={password.value}
+                    onChange={password.changeHandler}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          onClick={handleClickShowPassword}
+                          edge="end"
+                        >
+                          {showPass ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                  />
+                </FormControl>
                 {password.error && (
                   <Typography color="error" variant="caption">
                     {password.error}
@@ -282,7 +310,10 @@ const Login = () => {
                     variant="outlined"
                     color="warning"
                     sx={{ marginTop: "1rem" }}
-                    onClick={() => setIsLogin(true)}
+                    onClick={() => {
+                      setIsLogin(true);
+                      setShowPass(false);
+                    }}
                     disabled={isLoading}
                   >
                     login
