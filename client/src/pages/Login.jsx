@@ -2,6 +2,7 @@ import { useFileHandler, useInputValidation } from "6pp";
 import { CameraAlt, Visibility, VisibilityOff } from "@mui/icons-material";
 import {
   Avatar,
+  Box,
   Button,
   Container,
   FilledInput,
@@ -20,7 +21,6 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { VisuallyHiddenInput } from "../components/styles/styledComponents";
-import { LOGIN_PAGE_BG_STYLES } from "../constants/BackgroundConstants";
 import { userExists } from "../redux/reducers/auth";
 import { passwordValidator, usernameValidator } from "../utils/validators";
 
@@ -101,7 +101,12 @@ const Login = () => {
   };
 
   return (
-    <div style={LOGIN_PAGE_BG_STYLES}>
+    <div
+      style={{
+        width: "100%",
+        background: "linear-gradient(to right, #ff7e5f, #feb47b)",
+      }}
+    >
       <Container
         component={"main"}
         maxWidth="xs"
@@ -115,15 +120,21 @@ const Login = () => {
         <Paper
           elevation={3}
           sx={{
-            padding: 4,
+            padding: 2,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            backgroundColor: "rgba(255, 255, 255, 0.9)",
           }}
         >
           {isLogin ? (
-            <>
-              <Typography variant="h5">Login</Typography>
+            <Box textAlign={"center"}>
+              <Typography variant="h5" fontFamily={"revert"}>
+                <span style={{ color: "#d32f2f" }}>Hello</span> Again!
+              </Typography>
+              <Typography variant="caption" fontFamily={"revert"}>
+                Welcome back you've been missed.
+              </Typography>
               <form onSubmit={handleLogin}>
                 <TextField
                   required
@@ -132,17 +143,17 @@ const Login = () => {
                   margin="normal"
                   variant="filled"
                   disabled={isLoading}
-                  color="warning"
+                  color="error"
                   value={username.value}
                   onChange={username.changeHandler}
                 />
                 <FormControl margin="normal" fullWidth variant="filled">
-                  <InputLabel color="warning">Password *</InputLabel>
+                  <InputLabel color="error">Password *</InputLabel>
                   <FilledInput
                     fullWidth
                     type={showPass ? "text" : "password"}
                     disabled={isLoading}
-                    color="warning"
+                    color="error"
                     value={password.value}
                     onChange={password.changeHandler}
                     endAdornment={
@@ -157,53 +168,56 @@ const Login = () => {
                     }
                   />
                 </FormControl>
-                <div
-                  style={{ display: "flex", justifyContent: "space-between" }}
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    flexDirection: "column",
+                    marginTop: "0.5rem",
+                  }}
                 >
                   <Button
+                    type="submit"
+                    color="error"
+                    variant="contained"
+                    sx={{ marginTop: "0.5rem" }}
+                    disabled={isLoading}
+                  >
+                    Log In
+                  </Button>
+                  <Button
                     variant="outlined"
-                    color="warning"
-                    sx={{ marginTop: "1rem" }}
+                    color="error"
+                    size="small"
+                    sx={{ marginTop: "0.5rem" }}
                     onClick={() => {
                       setIsLogin(false);
                       setShowPass(false);
                     }}
                     disabled={isLoading}
                   >
-                    register
+                    create an account
                   </Button>
-                  <Button
-                    type="submit"
-                    color="warning"
-                    variant="contained"
-                    sx={{ marginTop: "1rem" }}
-                    disabled={isLoading}
-                  >
-                    sign in
-                  </Button>
-                </div>
+                </Box>
               </form>
-            </>
+            </Box>
           ) : (
-            <div style={{ maxHeight: "100vh" }}>
-              <Typography
-                textAlign={"center"}
-                variant="h5"
-                sx={{ marginBottom: "0.25rem" }}
-              >
-                Register
+            <Box textAlign={"center"} maxHeight={"100%"}>
+              <Typography variant="h5" fontFamily={"revert"}>
+                Welcome to <span style={{ color: "#d32f2f" }}>ChitChat!</span>
               </Typography>
               <form onSubmit={handleSignup}>
                 <Stack
                   position={"relative"}
-                  width={"6rem"}
-                  height={"6rem"}
-                  margin={"auto"}
+                  width={"5rem"}
+                  height={"5rem"}
+                  marginX={"auto"}
+                  marginY={"0.5rem"}
                 >
                   <Avatar
                     sx={{
-                      width: "6rem",
-                      height: "6rem",
+                      width: "5rem",
+                      height: "5rem",
                       objectFit: "contain",
                     }}
                     src={avatar.preview}
@@ -211,10 +225,8 @@ const Login = () => {
                   {avatar.error && (
                     <Typography
                       fontSize={"0.65rem"}
-                      width={"100%"}
                       display={"block"}
                       color="error"
-                      variant="caption"
                     >
                       *{avatar.error}
                     </Typography>
@@ -244,9 +256,9 @@ const Login = () => {
                   fullWidth
                   label="Fullname"
                   disabled={isLoading}
-                  margin="normal"
+                  sx={{ margin: "0.3rem 0" }}
                   variant="standard"
-                  color="warning"
+                  color="error"
                   value={fullname.value}
                   onChange={fullname.changeHandler}
                 />
@@ -254,9 +266,9 @@ const Login = () => {
                   required
                   fullWidth
                   disabled={isLoading}
-                  label="Something about yourself.."
-                  color="warning"
-                  margin="normal"
+                  label="About yourself..."
+                  color="error"
+                  sx={{ margin: "0.3rem 0" }}
                   variant="standard"
                   value={bio.value}
                   onChange={bio.changeHandler}
@@ -266,24 +278,32 @@ const Login = () => {
                   disabled={isLoading}
                   fullWidth
                   label="Username"
-                  margin="normal"
-                  color="warning"
+                  sx={{ margin: "0.3rem 0" }}
+                  color="error"
                   variant="standard"
                   value={username.value}
                   onChange={username.changeHandler}
                 />
                 {username.error && (
-                  <Typography color="error" variant="caption">
+                  <Typography
+                    color="error"
+                    sx={{ margin: "0", padding: "0" }}
+                    fontSize={"0.65rem"}
+                  >
                     {username.error}
                   </Typography>
                 )}
-                <FormControl fullWidth margin="normal" variant="standard">
-                  <InputLabel color="warning">Password *</InputLabel>
+                <FormControl
+                  fullWidth
+                  sx={{ margin: "0.3rem 0" }}
+                  variant="standard"
+                >
+                  <InputLabel color="error">Password *</InputLabel>
                   <Input
                     fullWidth
                     type={showPass ? "text" : "password"}
                     disabled={isLoading}
-                    color="warning"
+                    color="error"
                     value={password.value}
                     onChange={password.changeHandler}
                     endAdornment={
@@ -299,37 +319,47 @@ const Login = () => {
                   />
                 </FormControl>
                 {password.error && (
-                  <Typography color="error" variant="caption">
+                  <Typography
+                    color="error"
+                    fontSize={"0.65rem"}
+                    sx={{ margin: "0", padding: "0" }}
+                  >
                     {password.error}
                   </Typography>
                 )}
-                <div
-                  style={{ display: "flex", justifyContent: "space-between" }}
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    flexDirection: "column",
+                    marginTop: "0.5rem",
+                  }}
                 >
                   <Button
+                    type="submit"
+                    color="error"
+                    variant="contained"
+                    sx={{ marginTop: "0.5rem" }}
+                    disabled={isLoading}
+                  >
+                    Create account
+                  </Button>
+                  <Button
                     variant="outlined"
-                    color="warning"
-                    sx={{ marginTop: "1rem" }}
+                    size="small"
+                    color="error"
+                    sx={{ marginTop: "0.5rem" }}
                     onClick={() => {
                       setIsLogin(true);
                       setShowPass(false);
                     }}
                     disabled={isLoading}
                   >
-                    login
+                    log in
                   </Button>
-                  <Button
-                    type="submit"
-                    color="warning"
-                    variant="contained"
-                    sx={{ marginTop: "1rem" }}
-                    disabled={isLoading}
-                  >
-                    sign up
-                  </Button>
-                </div>
+                </Box>
               </form>
-            </div>
+            </Box>
           )}
         </Paper>
       </Container>

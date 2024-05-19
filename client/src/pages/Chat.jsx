@@ -2,7 +2,7 @@ import {
   AttachFile as AttachFileIcon,
   Send as SendIcon,
 } from "@mui/icons-material";
-import { Box, IconButton, Skeleton, Stack } from "@mui/material";
+import { Box, IconButton, Skeleton, Stack, Typography } from "@mui/material";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import AppLayout from "../components/Layout/AppLayout";
 import FileMenu from "../components/dialog/FileMenu";
@@ -183,6 +183,16 @@ const Chat = ({ chatId, user }) => {
             overflowY: "auto",
           }}
         >
+          {allMessages.length === 0 && (
+            <Box
+              width={"100%"}
+              textAlign={"center"}
+              fontSize={"1rem"}
+              sx={{ margin: "1rem" }}
+            >
+              No Messages Yet!
+            </Box>
+          )}
           {allMessages.map((message, index) => (
             <MessageComponent
               key={message._id || index}

@@ -1,11 +1,11 @@
-import { Box, IconButton, Stack, Typography } from "@mui/material";
+import { AvTimer } from "@mui/icons-material";
+import { Box, Stack, Typography } from "@mui/material";
+import { motion } from "framer-motion";
 import moment from "moment";
 import React from "react";
-import { AvTimer } from "@mui/icons-material";
+import { HEADER_COLOR } from "../../constants/ColorConstants";
 import { fileFormat } from "../../utils/features";
 import RenderAttachment from "./RenderAttachment";
-import { HEADER_COLOR } from "../../constants/ColorConstants";
-import { motion } from "framer-motion";
 
 const MessageComponent = ({ message, user }) => {
   const { content, sender, attachments = [], createdAt } = message;
