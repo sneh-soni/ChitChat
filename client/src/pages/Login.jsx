@@ -104,7 +104,7 @@ const Login = () => {
     <div
       style={{
         width: "100%",
-        background: "linear-gradient(to right, #ff7e5f, #feb47b)",
+        background: "linear-gradient(to right, #1565c0, #1e88e5)",
       }}
     >
       <Container
@@ -130,7 +130,7 @@ const Login = () => {
           {isLogin ? (
             <Box textAlign={"center"}>
               <Typography variant="h5" fontFamily={"revert"}>
-                <span style={{ color: "#d32f2f" }}>Hello</span> Again!
+                <span style={{ color: "#1565c0" }}>Hello</span> Again!
               </Typography>
               <Typography variant="caption" fontFamily={"revert"}>
                 Welcome back you've been missed.
@@ -143,17 +143,17 @@ const Login = () => {
                   margin="normal"
                   variant="filled"
                   disabled={isLoading}
-                  color="error"
+                  color="primary"
                   value={username.value}
                   onChange={username.changeHandler}
                 />
                 <FormControl margin="normal" fullWidth variant="filled">
-                  <InputLabel color="error">Password *</InputLabel>
+                  <InputLabel color="primary">Password *</InputLabel>
                   <FilledInput
                     fullWidth
                     type={showPass ? "text" : "password"}
                     disabled={isLoading}
-                    color="error"
+                    color="primary"
                     value={password.value}
                     onChange={password.changeHandler}
                     endAdornment={
@@ -178,7 +178,7 @@ const Login = () => {
                 >
                   <Button
                     type="submit"
-                    color="error"
+                    color="primary"
                     variant="contained"
                     sx={{ marginTop: "0.5rem" }}
                     disabled={isLoading}
@@ -186,8 +186,8 @@ const Login = () => {
                     Log In
                   </Button>
                   <Button
-                    variant="outlined"
-                    color="error"
+                    variant="text"
+                    color="info"
                     size="small"
                     sx={{ marginTop: "0.5rem" }}
                     onClick={() => {
@@ -204,7 +204,7 @@ const Login = () => {
           ) : (
             <Box textAlign={"center"} maxHeight={"100%"}>
               <Typography variant="h5" fontFamily={"revert"}>
-                Welcome to <span style={{ color: "#d32f2f" }}>ChitChat!</span>
+                Welcome to <span style={{ color: "#1565c0" }}>ChitChat!</span>
               </Typography>
               <form onSubmit={handleSignup}>
                 <Stack
@@ -258,7 +258,7 @@ const Login = () => {
                   disabled={isLoading}
                   sx={{ margin: "0.3rem 0" }}
                   variant="standard"
-                  color="error"
+                  color="primary"
                   value={fullname.value}
                   onChange={fullname.changeHandler}
                 />
@@ -267,7 +267,7 @@ const Login = () => {
                   fullWidth
                   disabled={isLoading}
                   label="About yourself..."
-                  color="error"
+                  color="primary"
                   sx={{ margin: "0.3rem 0" }}
                   variant="standard"
                   value={bio.value}
@@ -279,7 +279,7 @@ const Login = () => {
                   fullWidth
                   label="Username"
                   sx={{ margin: "0.3rem 0" }}
-                  color="error"
+                  color="primary"
                   variant="standard"
                   value={username.value}
                   onChange={username.changeHandler}
@@ -298,12 +298,12 @@ const Login = () => {
                   sx={{ margin: "0.3rem 0" }}
                   variant="standard"
                 >
-                  <InputLabel color="error">Password *</InputLabel>
+                  <InputLabel color="primary">Password *</InputLabel>
                   <Input
                     fullWidth
                     type={showPass ? "text" : "password"}
                     disabled={isLoading}
-                    color="error"
+                    color="primary"
                     value={password.value}
                     onChange={password.changeHandler}
                     endAdornment={
@@ -337,7 +337,7 @@ const Login = () => {
                 >
                   <Button
                     type="submit"
-                    color="error"
+                    color="primary"
                     variant="contained"
                     sx={{ marginTop: "0.5rem" }}
                     disabled={isLoading}
@@ -345,9 +345,9 @@ const Login = () => {
                     Create account
                   </Button>
                   <Button
-                    variant="outlined"
+                    variant="text"
                     size="small"
-                    color="error"
+                    color="info"
                     sx={{ marginTop: "0.5rem" }}
                     onClick={() => {
                       setIsLogin(true);

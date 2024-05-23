@@ -1,18 +1,17 @@
-import React from "react";
-import { Line, Doughnut } from "react-chartjs-2";
-import { HEADER_COLOR, BUTTON_COLOR } from "../../constants/ColorConstants";
-import { getLast7Days } from "../../utils/features";
 import {
-  Chart as Chartjs,
-  CategoryScale,
-  Tooltip,
-  LinearScale,
-  LineElement,
   ArcElement,
-  Legend,
+  CategoryScale,
+  Chart as Chartjs,
   Filler,
+  Legend,
+  LineElement,
+  LinearScale,
   PointElement,
+  Tooltip,
 } from "chart.js";
+import React from "react";
+import { Doughnut, Line } from "react-chartjs-2";
+import { getLast7Days } from "../../utils/features";
 
 Chartjs.register(
   CategoryScale,
@@ -60,8 +59,8 @@ const LineChart = ({ value = [] }) => {
         label: "Messages",
         data: value,
         fill: true,
-        backgroundColor: "rgba(255, 193, 7, 0.2)",
-        borderColor: HEADER_COLOR,
+        backgroundColor: "rgba(46, 125, 50, 0.5)",
+        borderColor: "#1b5e20",
         borderWidth: 1,
       },
     ],
@@ -76,7 +75,7 @@ const doughnutChatOptions = {
       display: false,
     },
   },
-  //   cutout: 120,
+  cutout: 60,
 };
 
 const DoughnutChart = ({ labels = [], value = [] }) => {
@@ -85,9 +84,9 @@ const DoughnutChart = ({ labels = [], value = [] }) => {
     datasets: [
       {
         data: value,
-        borderColor: ["rgba(255, 193, 7, 0.2)", "rgba(255, 61, 0, 0.2)"],
-        backgroundColor: [HEADER_COLOR, BUTTON_COLOR],
-        offset: 20,
+        borderColor: ["#ef5350", "#c62828"],
+        backgroundColor: ["#ef5350", "#c62828"],
+        offset: 40,
       },
     ],
   };
@@ -100,4 +99,4 @@ const DoughnutChart = ({ labels = [], value = [] }) => {
   );
 };
 
-export { LineChart, DoughnutChart };
+export { DoughnutChart, LineChart };

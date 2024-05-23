@@ -1,7 +1,6 @@
-import React from "react";
-import { DataGrid } from "@mui/x-data-grid";
 import { Container, Paper, Typography } from "@mui/material";
-import { HEADER_COLOR } from "../../constants/ColorConstants";
+import { DataGrid } from "@mui/x-data-grid";
+import React from "react";
 
 const Table = ({ rows, columns, heading, rowHeight = 52 }) => {
   return (
@@ -20,6 +19,7 @@ const Table = ({ rows, columns, heading, rowHeight = 52 }) => {
         <Typography
           textAlign={"center"}
           variant="h5"
+          fontWeight={"bold"}
           sx={{ margin: "1rem", textTransform: "uppercase" }}
         >
           {heading}
@@ -32,8 +32,8 @@ const Table = ({ rows, columns, heading, rowHeight = 52 }) => {
           sx={{
             border: "none",
             ".table-header": {
-              bgcolor: HEADER_COLOR,
-              color: "black",
+              bgcolor: "#0288d1",
+              color: "white",
               fontWeight: "bold",
             },
           }}

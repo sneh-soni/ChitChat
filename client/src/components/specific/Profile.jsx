@@ -1,11 +1,11 @@
-import { Avatar, Divider, Stack, Typography } from "@mui/material";
-import React from "react";
 import {
+  CalendarMonth as CalendarIcon,
   Face as FaceIcon,
   AlternateEmail as UserNameIcon,
-  CalendarMonth as CalendarIcon,
 } from "@mui/icons-material";
+import { Avatar, Divider, Stack, Typography } from "@mui/material";
 import moment from "moment";
+import React from "react";
 import { transformImage } from "../../utils/features";
 
 const ProfileCard = ({ text, Icon, heading }) => (
@@ -14,16 +14,16 @@ const ProfileCard = ({ text, Icon, heading }) => (
     alignItems={"center"}
     textAlign={"center"}
     color={"white"}
-    spacing={"1rem"}
+    spacing={"0.5rem"}
     justifyContent={"center"}
   >
     {Icon && Icon}
 
-    <Stack direction={"column"} spacing={0.5}>
-      <Typography variant="body1">{text}</Typography>
+    <Stack direction={"column"}>
       <Typography variant="caption" color={"gray"}>
         {heading}
       </Typography>
+      <Typography variant="body1">{text}</Typography>
     </Stack>
   </Stack>
 );

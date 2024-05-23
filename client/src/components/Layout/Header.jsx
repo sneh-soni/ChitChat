@@ -21,7 +21,6 @@ import React, { Suspense, lazy, startTransition } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { HEADER_COLOR } from "../../constants/ColorConstants.js";
 import ChatIcon from "../../constants/LogoSvg.jsx";
 import { userNotExists } from "../../redux/reducers/auth.js";
 import { resetNotification } from "../../redux/reducers/chat.js";
@@ -39,7 +38,7 @@ const NewGroupDialog = lazy(() => import("../specific/NewGroup.jsx"));
 const IconBtn = ({ title, onClick, icon, value }) => {
   return (
     <Tooltip title={title}>
-      <IconButton color="#000" size="medium" onClick={onClick}>
+      <IconButton color="#000000" size="medium" onClick={onClick}>
         {value ? (
           <Badge badgeContent={value} color="error">
             {" "}
@@ -99,7 +98,7 @@ const Header = () => {
         <AppBar
           position="static"
           sx={{
-            bgcolor: HEADER_COLOR,
+            background: "#1976d2",
             height: "3.2rem",
             justifyContent: "center",
           }}
@@ -111,11 +110,11 @@ const Header = () => {
                 display: {
                   xs: "none",
                   sm: "flex",
-                  gap: "8px",
-                  color: "black",
+                  gap: "0.5rem",
+                  alignItems: "center",
                 },
-                fontFamily: "monospace",
-                fontWeight: "bold",
+                fontFamily: "revert-layer",
+                color: "white",
               }}
             >
               <ChatIcon />

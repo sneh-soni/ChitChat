@@ -17,11 +17,16 @@ const ConfirmDeleteDialog = ({ open, handleClose, deleteHandler }) => {
           Are you sure you want to delete this group?
         </DialogContentText>
       </DialogContent>
-      <DialogActions>
-        <Button onClick={handleClose} variant="outlined" color="warning">
+      <DialogActions sx={{ gap: "1rem" }}>
+        <Button onClick={handleClose} variant="text" color="error" size="small">
           Cancel
         </Button>
-        <Button color="error" variant="contained" onClick={deleteHandler}>
+        <Button
+          color="error"
+          variant="contained"
+          onClick={deleteHandler}
+          size="small"
+        >
           Delete
         </Button>
       </DialogActions>

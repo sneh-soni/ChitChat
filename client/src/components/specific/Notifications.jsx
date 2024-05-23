@@ -16,56 +16,57 @@ import {
   useGetNotificationsQuery,
 } from "../../redux/api/api";
 import { setIsNotification } from "../../redux/reducers/misc";
+import { transformImage } from "../../utils/features";
+import { CloseRounded, CheckRounded } from "@mui/icons-material";
 
 const NotificationItem = memo(({ sender, _id, handler }) => {
   const { name, avatar } = sender;
   return (
-    <ListItem divider>
+    <ListItem>
       <Stack
         direction={"row"}
         alignItems={"center"}
-        spacing={"1rem"}
+        spacing={"0.5rem"}
         width={"100%"}
       >
-        <Avatar alt={name} src={avatar} />
-        <Stack>
+        <Avatar alt={name} src={transformImage(avatar)} />
+        <Stack flexGrow={1}>
           <Typography
-            variant="body1"
             sx={{
-              flexGrow: 1,
               display: "-webkit-box",
               WebkitLineClamp: 1,
               WebkitBoxOrient: "vertical",
               overflow: "hidden",
               textOverflow: "ellipsis",
+              fontSize: { xs: "0.8rem", sm: "1rem" },
             }}
           >
             {name}
           </Typography>
-          <Typography variant="caption" fontSize={"0.6rem"} color={"gray"}>
-            sent you a request
+          <Typography
+            variant="caption"
+            sx={{ fontSize: { xs: "0.5rem", sm: "0.6rem" } }}
+            color={"gray"}
+          >
+            sent a request
           </Typography>
         </Stack>
-        <Stack
-          paddingX={"1rem"}
-          direction={{ xs: "column", sm: "row" }}
-          spacing={"0.5rem"}
-        >
+        <Stack direction={"row"} spacing={"0.5rem"}>
           <Button
             color="error"
             variant="outlined"
             size="small"
             onClick={() => handler({ _id, accept: false })}
           >
-            Reject
+            <CloseRounded fontSize={"small"} />
           </Button>
           <Button
-            color="warning"
+            color="primary"
             variant="contained"
             size="small"
             onClick={() => handler({ _id, accept: true })}
           >
-            Accept
+            <CheckRounded fontSize={"small"} />
           </Button>
         </Stack>
       </Stack>
@@ -93,10 +94,7 @@ const Notifications = () => {
 
   return (
     <Dialog open={isNotification} onClose={closeHandler}>
-      <Stack
-        width={{ xs: "18rem", sm: "25rem" }}
-        padding={{ xs: "0.5rem", sm: "1rem" }}
-      >
+      <Stack width={{ xs: "80vw", sm: "25rem" }}>
         <DialogTitle>Notifications</DialogTitle>
         {isLoading ? (
           <Skeleton />
@@ -112,7 +110,9 @@ const Notifications = () => {
                 />
               ))
             ) : (
-              <Typography textAlign={"center"}>No Notifications</Typography>
+              <Typography textAlign={"center"} padding={"1rem"}>
+                Nothing new here
+              </Typography>
             )}
           </>
         )}

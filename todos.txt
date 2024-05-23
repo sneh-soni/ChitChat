@@ -1,12 +1,2 @@
-searchPeople and Notifications dialogs size fix (font and width) for mobile and add close buttons
-profile photo and name at the top of chat of whom chatting in chat
-message delete
-clear chat 
-header icons dialog boxes width on mobile devices fix
-avatar, username, password change feature
-
-
-
-// Errors
-ALERT socket event not working ==> when member is added or removed fropcham group
-deleteFilesFromCloudinary() ==> Not made
+ALERT socket event not working (when member is added or removed from group)
+deleteFilesFromCloudinary() (Not made)

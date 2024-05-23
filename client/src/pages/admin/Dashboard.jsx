@@ -43,13 +43,13 @@ const Dashboard = () => {
     <Paper
       elevation={3}
       sx={{
-        padding: { xs: "1rem", md: "1.5rem", lg: "2rem" },
+        padding: "1rem",
         margin: "1rem 0",
-        borderRadius: "0.5rem",
+        borderRadius: "0.25rem",
       }}
     >
-      <Stack direction={"row"} spacing={"1rem"} alignItems={"center"}>
-        <AdminPanelSettingsIcon sx={{ fontSize: "1.5rem" }} />
+      <Stack direction={"row"} spacing={"0.5rem"} alignItems={"center"}>
+        <AdminPanelSettingsIcon sx={{ fontSize: "2rem" }} />
         <SearchField placeholder="search.." />
         <CurvedButton>search</CurvedButton>
         <Box flexGrow={1} />
@@ -64,7 +64,10 @@ const Dashboard = () => {
         >
           {moment().format("dddd, D MMMM YYYY")}
         </Typography>
-        <NotificationsIcon sx={{ display: { xs: "none", sm: "block" } }} />
+        <NotificationsIcon
+          fontSize="small"
+          sx={{ display: { xs: "none", sm: "block" } }}
+        />
       </Stack>
     </Paper>
   );
@@ -121,7 +124,7 @@ const Dashboard = () => {
               elevation={3}
               sx={{
                 padding: "1rem 1.5rem",
-                borderRadius: "1rem",
+                borderRadius: "0.25rem",
                 margin: "1rem 0",
                 width: { xs: "100%", sm: "57%" },
               }}
@@ -136,7 +139,7 @@ const Dashboard = () => {
               sx={{
                 padding: "1rem 1.5rem",
                 margin: "1rem 0",
-                borderRadius: "1rem",
+                borderRadius: "0.25rem",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
@@ -175,9 +178,9 @@ const Widget = ({ title, value, icon }) => (
   <Paper
     elevation={3}
     sx={{
-      padding: "2rem",
+      padding: "1.5rem",
       margin: "1rem 0",
-      borderRadius: "1rem",
+      borderRadius: "0.25rem",
       width: { xs: "70%", sm: "30%" },
       maxWidth: "100%",
     }}
@@ -187,7 +190,7 @@ const Widget = ({ title, value, icon }) => (
         sx={{
           color: "black",
           borderRadius: "50%",
-          border: "5px solid rgba(0,0,0,0.85)",
+          border: "8px solid #9c27b0",
           height: "5rem",
           width: "5rem",
           display: "flex",

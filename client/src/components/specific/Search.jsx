@@ -1,6 +1,7 @@
 import { useInputValidation } from "6pp";
 import { Search as SearchIcon } from "@mui/icons-material";
 import {
+  Box,
   Dialog,
   DialogTitle,
   InputAdornment,
@@ -50,25 +51,24 @@ const Search = () => {
 
   return (
     <Dialog open={isSearch} onClose={seachCloseHandler}>
-      <Stack
-        padding={{ xs: "0.5rem", sm: "1rem" }}
-        width={{ xs: "18rem", sm: "25rem" }}
-      >
-        <DialogTitle textAlign={"center"}>Find People</DialogTitle>
-        <TextField
-          label=""
-          value={search.value}
-          onChange={search.changeHandler}
-          variant="outlined"
-          size="small"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon />
-              </InputAdornment>
-            ),
-          }}
-        />
+      <Stack width={{ xs: "80vw", sm: "25rem" }}>
+        <DialogTitle textAlign={"center"}>Add Friends</DialogTitle>
+        <Box sx={{ width: "100%" }} p={"0.5rem"}>
+          <TextField
+            fullWidth
+            value={search.value}
+            onChange={search.changeHandler}
+            variant="outlined"
+            size="small"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+            }}
+          />
+        </Box>
         <List>
           {users.map((user) => (
             <UserItem

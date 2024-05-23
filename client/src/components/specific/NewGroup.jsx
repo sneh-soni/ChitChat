@@ -1,5 +1,6 @@
 import { useInputValidation } from "6pp";
 import {
+  Box,
   Button,
   Dialog,
   DialogTitle,
@@ -56,18 +57,18 @@ const NewGroup = () => {
 
   return (
     <Dialog open={isNewGroup} onClose={closeHandler}>
-      <Stack
-        width={{ xs: "18rem", sm: "25rem" }}
-        padding={{ xs: "0.5rem", sm: "1rem" }}
-        spacing={"0.5rem"}
-      >
-        <DialogTitle textAlign={"center"}>New Group</DialogTitle>
-        <TextField
-          color="warning"
-          label="Group Name"
-          value={groupName.value}
-          onChange={groupName.changeHandler}
-        />
+      <Stack width={{ xs: "80vw", sm: "25rem" }} spacing={"0.5rem"}>
+        <DialogTitle textAlign={"center"}>Create New Group</DialogTitle>
+        <Box sx={{ width: "100%" }} p={"0.5rem"}>
+          <TextField
+            color="primary"
+            fullWidth
+            label="Group Name"
+            size="small"
+            value={groupName.value}
+            onChange={groupName.changeHandler}
+          />
+        </Box>
         <Typography paddingLeft={"1rem"}>Add Members</Typography>
         <Stack>
           {isLoading ? (
@@ -83,13 +84,18 @@ const NewGroup = () => {
             ))
           )}
         </Stack>
-        <Stack direction="row" justifyContent={"space-between"}>
-          <Button variant="outlined" color="error" onClick={closeHandler}>
+        <Stack
+          direction="row"
+          padding={"0.5rem"}
+          spacing={"0.5rem"}
+          justifyContent={"space-between"}
+        >
+          <Button variant="text" color="error" onClick={closeHandler}>
             Cancel
           </Button>
           <Button
             variant="contained"
-            color="warning"
+            color="primary"
             onClick={submitHandler}
             disabled={isLoadingNewGroup}
           >

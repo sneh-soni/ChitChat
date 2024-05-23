@@ -104,7 +104,7 @@ const AppLayout = () => (WrappedComponent) => {
         ) : (
           <Drawer open={isMobile} onClose={handleMobileClose}>
             <ChatList
-              w="70vw"
+              w="60vw"
               chats={data?.chats}
               chatId={chatId}
               handleDeleteChat={handleDeleteChat}
@@ -148,8 +148,8 @@ const AppLayout = () => (WrappedComponent) => {
             sx={{
               display: { xs: "none", md: "block" },
               position: "relative",
-              backgroundColor: "rgba(0,0,0,0.85)",
-              borderRadius: "0.2rem",
+              background:
+                "linear-gradient(to bottom, #000000, #0A0A0A, #1C1C1C)",
             }}
           >
             <Profile user={user} />

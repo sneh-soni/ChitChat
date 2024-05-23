@@ -76,7 +76,7 @@ const columns = [
   },
   {
     field: "chat",
-    headerName: "Mongo Chat Id",
+    headerName: "Chat Mongo Id",
     width: 260,
     headerClassName: "table-header",
   },
@@ -119,7 +119,7 @@ const MessageMangement = () => {
         <Skeleton height={"100vh"} />
       ) : (
         <Table
-          heading={"All Messages"}
+          heading={"Messages"}
           rows={rows}
           columns={columns}
           rowHeight={200}

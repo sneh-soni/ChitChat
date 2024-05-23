@@ -6,16 +6,15 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import UserItem from "../shared/UserItem";
 import React, { useState } from "react";
-import { sampleUsers } from "../../constants/SampleData";
+import { useDispatch, useSelector } from "react-redux";
 import { useAsyncMutation, useErrors } from "../../hooks/hook";
 import {
   useAddGroupMembersMutation,
   useAvailableFriendsQuery,
 } from "../../redux/api/api";
-import { useDispatch, useSelector } from "react-redux";
 import { setIsAddMember } from "../../redux/reducers/misc";
+import UserItem from "../shared/UserItem";
 
 const AddMemberDialog = ({ chatId }) => {
   const dispatch = useDispatch();
@@ -46,13 +45,9 @@ const AddMemberDialog = ({ chatId }) => {
 
   return (
     <Dialog open={isAddMember} onClose={closeHandler}>
-      <Stack
-        width={{ xs: "18rem", sm: "20rem" }}
-        paddingX={"1rem"}
-        paddingY={"0.5rem"}
-      >
+      <Stack width={{ xs: "80vw", sm: "25rem" }}>
         <DialogTitle textAlign={"center"}>Add Members</DialogTitle>
-        <Stack spacing={"1rem"}>
+        <Stack spacing={"0.5rem"}>
           {isLoading ? (
             <Skeleton />
           ) : data?.friends?.length > 0 ? (
@@ -71,21 +66,27 @@ const AddMemberDialog = ({ chatId }) => {
       </Stack>
       <Stack
         direction={"row"}
-        paddingX={"1rem"}
+        paddingY={"1rem"}
         alignItems={"center"}
-        paddingY={"0.5rem"}
+        paddingX={"0.5rem"}
         justifyContent={"space-between"}
       >
-        <Button variant="outlined" color="error" onClick={closeHandler}>
+        <Button
+          variant="text"
+          size="small"
+          color="error"
+          onClick={closeHandler}
+        >
           Cancel
         </Button>
         <Button
-          color="warning"
+          color="primary"
+          size="small"
           variant="contained"
           disabled={isLoadingAddMembers}
           onClick={addMemberSubmitHandler}
         >
-          Submit
+          confirm
         </Button>
       </Stack>
     </Dialog>

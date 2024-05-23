@@ -1,9 +1,7 @@
-import { AvTimer } from "@mui/icons-material";
 import { Box, Stack, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import moment from "moment";
 import React from "react";
-import { HEADER_COLOR } from "../../constants/ColorConstants";
 import { fileFormat } from "../../utils/features";
 import RenderAttachment from "./RenderAttachment";
 
@@ -17,8 +15,7 @@ const MessageComponent = ({ message, user }) => {
       animate={{ opacity: 1, x: 0 }}
       style={{
         alignSelf: sameSender ? "flex-end" : "flex-start",
-        backgroundColor: sameSender ? "rgba(0,0,0,0.2)" : HEADER_COLOR,
-        padding: "0.3rem",
+        backgroundColor: sameSender ? "rgba(0,0,0,0.1)" : "#42a5f5",
         borderRadius: "0.25rem",
         color: "black",
         width: attachments.length > 0 ? "45%" : "fit-content",
@@ -31,17 +28,21 @@ const MessageComponent = ({ message, user }) => {
     >
       {!sameSender && (
         <Typography
-          backgroundColor={"rgba(0,0,0,0.5)"}
-          variant="caption"
-          paddingY={"0.2rem"}
-          paddingX={"0.5rem"}
+          backgroundColor={"rgba(0,0,0,0.25)"}
+          paddingX={"0.25rem"}
+          paddingY={"0.1rem"}
+          fontSize={"0.6rem"}
           color={"white"}
-          borderRadius={"0.5rem"}
+          borderRadius={"0.25rem"}
         >
           {sender.name}
         </Typography>
       )}
-      {content && <Typography>{content}</Typography>}
+      {content && (
+        <Typography paddingX={"0.5rem"} paddingY={"0.25rem"}>
+          {content}
+        </Typography>
+      )}
 
       {attachments.length > 0 &&
         attachments.map((attachment, index) => {
@@ -49,7 +50,12 @@ const MessageComponent = ({ message, user }) => {
           const file = fileFormat(url);
 
           return (
-            <Box width={"100%"} paddingY={"0.5rem"} key={index}>
+            <Box
+              width={"100%"}
+              paddingX={"0.5rem"}
+              paddingY={"0.25rem"}
+              key={index}
+            >
               <a
                 href={url}
                 target="_blank"
@@ -67,14 +73,9 @@ const MessageComponent = ({ message, user }) => {
         })}
 
       <Stack direction={"row"} alignItems={"center"}>
-        <AvTimer
-          sx={{
-            width: "0.8rem",
-          }}
-        />
         <Typography
           paddingX={"0.25rem"}
-          variant="caption"
+          paddingY={"0.1rem"}
           sx={{
             fontSize: "0.6rem",
             wordSpacing: "-0.1em",

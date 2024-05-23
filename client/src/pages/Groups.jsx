@@ -13,13 +13,13 @@ import {
   Drawer,
   Grid,
   IconButton,
-  ListItem,
   Skeleton,
   Stack,
   TextField,
   Tooltip,
   Typography,
 } from "@mui/material";
+import { motion } from "framer-motion";
 import React, { Suspense, lazy, memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -27,7 +27,6 @@ import { LayoutLoader } from "../components/Layout/Loaders";
 import AvatarCard from "../components/shared/AvatarCard";
 import UserItem from "../components/shared/UserItem";
 import { Link } from "../components/styles/styledComponents";
-import { HEADER_COLOR } from "../constants/ColorConstants";
 import { useAsyncMutation, useErrors } from "../hooks/hook";
 import {
   useChatDetailsQuery,
@@ -163,7 +162,10 @@ const Groups = () => {
           },
         }}
       >
-        <IconButton onClick={() => setIsMobileMenu((prev) => !prev)}>
+        <IconButton
+          size="small"
+          onClick={() => setIsMobileMenu((prev) => !prev)}
+        >
           <MenuIcon />
         </IconButton>
       </Box>
@@ -172,14 +174,15 @@ const Groups = () => {
           sx={{
             position: "absolute",
             top: "1rem",
-            left: "1rem",
-            backgroundColor: "rgba(0,0,0,0.8)",
+            left: "0.5rem",
+            backgroundColor: "rgba(0,0,0,0.7)",
             ":hover": {
-              backgroundColor: "rgba(0,0,0,0.85)",
+              backgroundColor: "rgba(0,0,0,0.75)",
             },
             color: "white",
           }}
           onClick={navigateBack}
+          size="small"
         >
           <KeyboardBackspaceIcon />
         </IconButton>
@@ -200,16 +203,23 @@ const Groups = () => {
             value={groupNameUpdated}
             onChange={(e) => setGroupNameUpdated(e.target.value)}
           />
-          <IconButton onClick={updateGroupName} disabled={isLoadingGroupName}>
+          <IconButton
+            size="small"
+            onClick={updateGroupName}
+            disabled={isLoadingGroupName}
+          >
             <DoneIcon />
           </IconButton>
         </>
       ) : (
         <>
-          <Typography fontWeight={"600"}>{groupName}</Typography>
+          <Typography fontWeight={"600"} wordBreak={"break-word"}>
+            {groupName}
+          </Typography>
           <IconButton
             onClick={() => setIsEdit(true)}
             disabled={isLoadingGroupName}
+            size="small"
           >
             <EditIcon />
           </IconButton>
@@ -221,20 +231,17 @@ const Groups = () => {
   const ButtonGroup = (
     <>
       <Stack
-        direction={{
-          xs: "column-reverse",
-          sm: "row",
-        }}
+        direction={"row"}
         spacing={{ xs: "1rem", sm: "2rem" }}
-        padding={{
-          xs: "0.5rem",
-          sm: "1rem",
+        paddingY={{
+          xs: "1rem",
           md: "1rem 4rem",
         }}
       >
         <Button
           onClick={openConfirmDelete}
           color="error"
+          size="small"
           variant="outlined"
           startIcon={<DeleteIcon />}
         >
@@ -242,7 +249,8 @@ const Groups = () => {
         </Button>
         <Button
           onClick={openAddMember}
-          color="warning"
+          color="primary"
+          size="small"
           variant="contained"
           startIcon={<AddIcon />}
         >
@@ -273,6 +281,7 @@ const Groups = () => {
           alignItems: "center",
           padding: "1rem 3rem",
           position: "relative",
+          backgroundColor: "rgba(0,0,0,0.05)",
         }}
       >
         {IconBtns}
@@ -281,19 +290,14 @@ const Groups = () => {
             {GroupName}
 
             <Typography alignSelf={"flex-start"} margin={"1rem"}>
-              Members
+              Group Members
             </Typography>
 
             <Stack
               width={"100%"}
               maxWidth={"45rem"}
               boxSizing={"border-box"}
-              padding={{
-                sm: "1rem",
-                xs: "0",
-                md: "1rem 4rem",
-              }}
-              spacing={"2rem"}
+              spacing={"1.5rem"}
               height={"60vh"}
               overflow={"auto"}
             >
@@ -354,7 +358,7 @@ const Groups = () => {
         onClose={() => setIsMobileMenu(false)}
       >
         <GroupsList
-          w={"70vw"}
+          w={"60vw"}
           myGroups={myGroups?.data?.groups}
           chatId={chatId}
           setIsMobileMenu={setIsMobileMenu}
@@ -368,8 +372,9 @@ const GroupsList = ({ w = "100%", myGroups = [], chatId, setIsMobileMenu }) => {
   return (
     <Stack
       width={w}
+      paddingX={"0.25rem"}
       sx={{
-        bgcolor: HEADER_COLOR,
+        bgcolor: "#0288d1",
         height: "100vh",
         overflowY: "auto",
       }}
@@ -403,21 +408,22 @@ const GroupListItem = memo(({ group, chatId, setIsMobileMenu }) => {
         setIsMobileMenu(false);
       }}
     >
-      <ListItem
-        divider
+      <motion.div
+        initial={{ opacity: 0, y: "-100%" }}
+        animate={{ opacity: 1, y: 0 }}
         style={{
           display: "flex",
-          gap: "1rem",
+          gap: "0.5rem",
           alignItems: "center",
           padding: "0.5rem",
           color: "black",
         }}
       >
-        <Stack direction={"row"} spacing={"1rem"} alignItems={"center"}>
+        <Stack direction={"row"} spacing={"0.5rem"} alignItems={"center"}>
           <AvatarCard avatar={avatar} />
-          <Typography fontSize={"1.2rem"}>{name}</Typography>
+          <Typography fontSize={"1rem"}>{name}</Typography>
         </Stack>
-      </ListItem>
+      </motion.div>
     </Link>
   );
 });

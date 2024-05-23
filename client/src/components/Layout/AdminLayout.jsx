@@ -61,9 +61,9 @@ const Sidebar = ({ w = "100%" }) => {
     dispatch(adminLogout());
   };
   return (
-    <Stack width={w} direction={"column"} padding={"1.5rem"}>
-      <Typography variant="h5" marginY={"1rem"}>
-        ChitChat
+    <Stack width={w} direction={"column"} padding={"1rem"}>
+      <Typography textAlign={"center"} variant="h5" marginY={"1rem"}>
+        Hey! <span style={{ color: "#0288d1" }}> Admin</span>
       </Typography>
       <Stack spacing={"1rem"}>
         {adminTabs.map((tab) => {
@@ -76,14 +76,14 @@ const Sidebar = ({ w = "100%" }) => {
                   backgroundColor: "rgba(0,0,0,0.25)",
                 }),
                 display: "flex",
-                gap: "1rem",
+                gap: "0.5rem",
                 alignItems: "center",
-                borderRadius: "0.2rem",
-                padding: "1rem",
+                borderRadius: "0.25rem",
+                padding: "0.5rem",
                 color: "black",
               }}
             >
-              <Stack direction={"row"} spacing={"1rem"} alignItems={"center"}>
+              <Stack direction={"row"} spacing={"0.5rem"} alignItems={"center"}>
                 {tab.icon}
                 <Typography>{tab.name}</Typography>
               </Stack>
@@ -94,14 +94,14 @@ const Sidebar = ({ w = "100%" }) => {
           onClick={logoutHandler}
           sx={{
             display: "flex",
-            gap: "1rem",
+            gap: "0.5rem",
             alignItems: "center",
-            borderRadius: "0.2rem",
-            padding: "1rem",
+            borderRadius: "0.25rem",
+            padding: "0.5rem",
             color: "black",
           }}
         >
-          <Stack direction={"row"} spacing={"1rem"} alignItems={"center"}>
+          <Stack direction={"row"} spacing={"0.5rem"} alignItems={"center"}>
             <ExitToAppIcon />
             <Typography>Logout</Typography>
           </Stack>
@@ -134,18 +134,18 @@ const AdminLayout = ({ children }) => {
           top: "1rem",
         }}
       >
-        <IconButton onClick={handleMobile}>
+        <IconButton size="small" onClick={handleMobile}>
           {isMobile ? <CloseIcon /> : <MenuIcon />}
         </IconButton>
       </Box>
       <Grid item md={4} lg={3} sx={{ display: { xs: "none", md: "block" } }}>
         <Sidebar w="100%" />
       </Grid>
-      <Grid item xs={12} md={8} lg={9} sx={{ bgcolor: "rgba(0,0,0,0.25)" }}>
+      <Grid item xs={12} md={8} lg={9} sx={{ bgcolor: "#42a5f5" }}>
         {children}
       </Grid>
       <Drawer open={isMobile} onClose={handleClose}>
-        <Sidebar w="70vw" />
+        <Sidebar w="60vw" />
       </Drawer>
     </Grid>
   );

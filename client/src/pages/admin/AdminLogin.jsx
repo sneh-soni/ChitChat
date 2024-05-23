@@ -34,7 +34,7 @@ const AdminLogin = () => {
     <div
       style={{
         width: "100%",
-        background: "linear-gradient(to right, #ff7e5f, #feb47b)",
+        background: "linear-gradient(to right, #1565c0, #1e88e5)",
       }}
     >
       <Container
@@ -59,7 +59,7 @@ const AdminLogin = () => {
           }}
         >
           <Typography variant="h5" fontFamily={"revert"}>
-            <span style={{ color: "#d32f2f" }}>Admin </span>Login
+            <span style={{ color: "#1976d2" }}>Admin </span>Login
           </Typography>
           <form style={{ width: "100%" }} onSubmit={submitHandler}>
             <TextField
@@ -68,7 +68,7 @@ const AdminLogin = () => {
               type="password"
               label="Enter your key"
               margin="normal"
-              color="error"
+              color="primary"
               variant="outlined"
               value={secretKey.value}
               onChange={secretKey.changeHandler}
@@ -82,7 +82,7 @@ const AdminLogin = () => {
             >
               <Button
                 type="submit"
-                color="error"
+                color="primary"
                 variant="contained"
                 sx={{ marginTop: "0.5rem" }}
               >
@@ -90,7 +90,7 @@ const AdminLogin = () => {
               </Button>
               <Button
                 variant="outlined"
-                color="error"
+                color="primary"
                 size="small"
                 sx={{ marginTop: "0.5rem" }}
                 onClick={() => navigate("/")}

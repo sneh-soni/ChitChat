@@ -208,7 +208,7 @@ const Chat = ({ chatId, user }) => {
           onSubmit={submitHandler}
         >
           <Stack
-            spacing={"0.5rem"}
+            spacing={"0.25rem"}
             direction={"row"}
             height={"100%"}
             alignItems={"center"}
@@ -216,6 +216,7 @@ const Chat = ({ chatId, user }) => {
           >
             <IconButton
               sx={{ position: "absolute", rotate: "30deg", left: "0.5rem" }}
+              size="small"
               onClick={handleFileOpen}
             >
               <AttachFileIcon />
@@ -229,15 +230,15 @@ const Chat = ({ chatId, user }) => {
               type="submit"
               size="small"
               sx={{
-                backgroundColor: "warning.main",
+                backgroundColor: "primary.main",
                 color: "white",
-                padding: "0.5rem",
+                padding: "0.4rem",
                 "&:hover": {
-                  backgroundColor: "warning.dark",
+                  backgroundColor: "primary.dark",
                 },
               }}
             >
-              <SendIcon />
+              <SendIcon fontSize="small" />
             </IconButton>
           </Stack>
         </form>

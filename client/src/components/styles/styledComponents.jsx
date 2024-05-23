@@ -28,7 +28,7 @@ const InputBox = styled("input")`
   border: none;
   outline: none;
   padding: 0 2.5rem;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   font-size: 0.9rem;
   background-color: rgba(0, 0, 0, 0.25);
   ::placeholder {
@@ -42,21 +42,20 @@ const SearchField = styled("input")`
   width: 18vmax;
   border: none;
   outline: none;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   background-color: rgba(0, 0, 0, 0.25);
 `;
 
 const CurvedButton = styled("button")`
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   padding: 0.5rem 1rem;
-  font-size: 0.75rem;
   border: none;
   outline: none;
   cursor: pointer;
-  background-color: rgba(0, 0, 0, 0.85);
+  background-color: #1976d2;
   color: white;
   &:hover {
-    background-color: black;
+    background-color: #1565c0;
   }
 `;
 

@@ -12,24 +12,25 @@ const UserItem = ({
 }) => {
   const { name, _id, avatar } = user;
   return (
-    <ListItem divider>
+    <ListItem>
       <Stack
         direction={"row"}
         alignItems={"center"}
-        spacing={"1rem"}
+        spacing={"0.5rem"}
         width={"100%"}
         {...styling}
       >
         <Avatar src={transformImage(avatar)} />
         <Typography
-          variant="body1"
           sx={{
             flexGrow: 1,
+            flexShrink: 1,
             display: "-webkit-box",
             WebkitLineClamp: 1,
             WebkitBoxOrient: "vertical",
             overflow: "hidden",
             textOverflow: "ellipsis",
+            fontSize: { xs: "0.8rem", sm: "1rem" },
           }}
         >
           {name}
@@ -37,9 +38,9 @@ const UserItem = ({
         <IconButton
           size="small"
           sx={{
-            bgcolor: isAdded ? "error.main" : "warning.main",
+            bgcolor: isAdded ? "error.main" : "primary.main",
             color: "white",
-            "&:hover": { bgcolor: isAdded ? "error.dark" : "warning.dark" },
+            "&:hover": { bgcolor: isAdded ? "error.dark" : "primary.dark" },
           }}
           onClick={() => handler(_id)}
           disabled={handlerIsLoading}
