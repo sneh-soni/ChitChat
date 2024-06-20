@@ -1,2 +1,2 @@
-ALERT socket event not working (when member is added or removed from group)
-deleteFilesFromCloudinary() (Not made)
+ALERT socket event fix (when member is added or removed from group)
+deleteFilesFromCloudinary()
