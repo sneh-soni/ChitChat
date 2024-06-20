@@ -1,7 +1,7 @@
 <div align="center">
   <br />
     <a href="https://chit-chat-tawny.vercel.app" target="_blank">
-      <img src="https://cdn.dribbble.com/userupload/6877758/file/original-16470326bc0c4946a63567dde381f939.png?resize=1024x460" alt="Project Banner">
+      <img src="https://cdn.dribbble.com/userupload/2949963/file/original-7c9ff3de823925aa49d4781716e0139d.png?resize=1024x320" alt="Project Banner">
     </a>
   <br />
   <div>
@@ -14,7 +14,7 @@
   <img src="https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white" alt="redux-toolkit" />
   <img src="https://img.shields.io/badge/Cloudinary-3448C5?style=for-the-badge&logo=Cloudinary&logoColor=white" alt="cloudinary" />
   </div>
-  <h3 align="center">Real-Time Chat Application</h3>
+  <h3 align="center">ChitChat - Real-Time Chat Application</h3>
 </div>
 
 ## 📋 <a name="table">Table of Contents</a>
