@@ -14,7 +14,9 @@
   <img src="https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white" alt="redux-toolkit" />
   <img src="https://img.shields.io/badge/Cloudinary-3448C5?style=for-the-badge&logo=Cloudinary&logoColor=white" alt="cloudinary" />
   </div>
-  <h3 align="center">ChitChat - Real-Time Chat Application</h3>
+  <a href="https://chit-chat-tawny.vercel.app" target="_blank">
+    <h3 align="center"><b>ChitChat</b> - Real-Time Chat Application</h3>
+  </a>
 </div>
 
 ## 📋 <a name="table">Table of Contents</a>
