@@ -1,7 +1,7 @@
 <div align="center">
   <br />
     <a href="https://chit-chat-tawny.vercel.app" target="_blank">
-      <img src="https://res.cloudinary.com/dw61knhif/image/upload/v1718876150/Chitchat_e2yvyg.png" alt="Project Banner">
+      <img src="https://res.cloudinary.com/dw61knhif/image/upload/v1720630686/Purple_Modern_Minimalist_Message_Logo_gp99am.png" width="480px" alt="Project Banner">
     </a>
   <br />
   <div>
